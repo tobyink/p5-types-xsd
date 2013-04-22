@@ -268,10 +268,10 @@ sub facet
 			$inline_generator->(@_)->($self, '$_[0]'),
 		);
 	};
-	$self->{name_generator} = sub {
-		my ($s, %a) = @_;
-		sprintf('%s[%s]', $s, join q[,], map sprintf("%s=>%s", $_, perlstring $a{$_}), sort keys %a);			
-	};
+#	$self->{name_generator} = sub {
+#		my ($s, %a) = @_;
+#		sprintf('%s[%s]', $s, join q[,], map sprintf("%s=>%s", $_, perlstring $a{$_}), sort keys %a);
+#	};
 	
 	return if $self->is_anon;
 	
