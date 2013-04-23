@@ -2,7 +2,6 @@ use strict;
 use warnings;
 use utf8;
 
-use Test::DescribeMe qw(extended);
 use Test::More;
 use Test::TypeTiny;
 
