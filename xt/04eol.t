@@ -1,2 +1,2 @@
 use Test::EOL;
-all_perl_files_ok("lib", "t", "meta");
+all_perl_files_ok();
