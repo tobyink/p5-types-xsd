@@ -22,7 +22,6 @@ use strict;
 use warnings;
 use utf8;
 
-use Test::DescribeMe qw(extended);
 use Test::More;
 use Test::TypeTiny;
 
@@ -66,11 +65,18 @@ OUT
 		# XML regexes have these \c and \i things which we'll attempt to fake.
 		$facets{pattern} =~ s/\\c/(?:\$XML::RegExp::NameChar)/g;
 		$facets{pattern} =~ s/\\i/(?:\$XML::RegExp::NameChar)/g;
-		eval { $facets{pattern} = qr{^$facets{pattern}$}ms }
-		or do {
-			print $out "\tlocal \$TODO = \"could not compile regexp\";\n";
+		if ($facets{pattern} =~ /\[[^\]]+-\[/)
+		{
+			print $out "\tlocal \$TODO = \"XML Schema regexp not easily translated to Perl\";\n";
 			delete($facets{pattern});
-		};
+		}
+		else
+		{
+			eval { $facets{pattern} = qr{^$facets{pattern}$}ms } or do {
+				print $out "\tlocal \$TODO = \"could not compile regexp\";\n";
+				delete($facets{pattern});
+			}
+		}
 	}
 	
 	local $Data::Dumper::Terse  = 1;

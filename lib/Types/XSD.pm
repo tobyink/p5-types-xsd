@@ -90,6 +90,21 @@ sub dur_cmp
 	return undef;
 }
 
+sub hex_length
+{
+	my $str = shift;
+	my $len = ($str =~ tr/0-9A-Fa-f//);
+	$len / 2;
+}
+
+sub b64_length
+{
+	my $str = shift;
+	$str =~ s/[^a-zA-Z0-9+\x{2f}=]//g;
+	my $padding = ($str =~ tr/=//);
+	(length($str) * 3 / 4) - $padding;
+}
+
 our @patterns; my $pattern_i = -1;
 my %facets = (
 	length => sub {
@@ -106,6 +121,36 @@ my %facets = (
 		my ($o, $var) = @_;
 		return unless exists $o->{minLength};
 		sprintf('length(%s)>=%d', $var, delete $o->{minLength});
+	},
+	lengthHex => sub {
+		my ($o, $var) = @_;
+		return unless exists $o->{length};
+		sprintf('Types::XSD::hex_length(%s)==%d', $var, delete $o->{length});
+	},
+	maxLengthHex => sub {
+		my ($o, $var) = @_;
+		return unless exists $o->{maxLength};
+		sprintf('Types::XSD::hex_length(%s)<=%d', $var, delete $o->{maxLength});
+	},
+	minLengthHex => sub {
+		my ($o, $var) = @_;
+		return unless exists $o->{minLength};
+		sprintf('Types::XSD::hex_length(%s)>=%d', $var, delete $o->{minLength});
+	},
+	lengthB64 => sub {
+		my ($o, $var) = @_;
+		return unless exists $o->{length};
+		sprintf('Types::XSD::b64_length(%s)==%d', $var, delete $o->{length});
+	},
+	maxLengthB64 => sub {
+		my ($o, $var) = @_;
+		return unless exists $o->{maxLength};
+		sprintf('Types::XSD::b64_length(%s)<=%d', $var, delete $o->{maxLength});
+	},
+	minLengthB64 => sub {
+		my ($o, $var) = @_;
+		return unless exists $o->{minLength};
+		sprintf('Types::XSD::b64_length(%s)>=%d', $var, delete $o->{minLength});
 	},
 	pattern => sub {
 		my ($o, $var) = @_;
@@ -416,10 +461,10 @@ declare Entities, as Types::Standard::StrMatch[qr{^(?:$XML::RegExp::NCName)(?:\s
 facet qw( pattern whiteSpace ),
 declare Boolean, as Types::Standard::StrMatch[qr{^(?:true|false|0|1)$}ism];
 
-facet qw( length minLength maxLength pattern enumeration whiteSpace ),
+facet qw( lengthB64 minLengthB64 maxLengthB64 pattern enumeration whiteSpace ),
 declare Base64Binary, as Types::Standard::StrMatch[qr{^[a-zA-Z0-9+\x{2f}=\s]+$}ism];
 
-facet qw( length minLength maxLength pattern enumeration whiteSpace ),
+facet qw( lengthHex minLengthHex maxLengthHex pattern enumeration whiteSpace ),
 declare HexBinary, as Types::Standard::StrMatch[qr{^[a-fA-F0-9]+$}ism];
 
 facet qw( pattern enumeration whiteSpace maxInclusiveFloat maxExclusiveFloat minInclusiveFloat minExclusiveFloat ),
