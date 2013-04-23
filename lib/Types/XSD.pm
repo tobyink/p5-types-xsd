@@ -137,6 +137,24 @@ my %facets = (
 		return unless exists $o->{minLength};
 		sprintf('Types::XSD::hex_length(%s)>=%d', $var, delete $o->{minLength});
 	},
+	lengthQName => sub {
+		my ($o, $var) = @_;
+		return unless exists $o->{length};
+		delete $o->{length};
+		"!!1"
+	},
+	maxLengthQName => sub {
+		my ($o, $var) = @_;
+		return unless exists $o->{maxLength};
+		delete $o->{maxLength};
+		"!!1"
+	},
+	minLengthQName => sub {
+		my ($o, $var) = @_;
+		return unless exists $o->{minLength};
+		delete $o->{minLength};
+		"!!1"
+	},
 	lengthB64 => sub {
 		my ($o, $var) = @_;
 		return unless exists $o->{length};
@@ -313,10 +331,10 @@ sub facet
 		);
 		eval($sub) or croak "could not build sub: $@\n\nCODE: $sub\n";
 	};
-#	$self->{name_generator} = sub {
-#		my ($s, %a) = @_;
-#		sprintf('%s[%s]', $s, join q[,], map sprintf("%s=>%s", $_, perlstring $a{$_}), sort keys %a);
-#	};
+	$self->{name_generator} = sub {
+		my ($s, %a) = @_;
+		sprintf('%s[%s]', $s, join q[,], map sprintf("%s=>%s", $_, perlstring $a{$_}), sort keys %a);
+	};
 	
 	return if $self->is_anon;
 	
@@ -476,10 +494,10 @@ declare Double, as Types::Standard::Num;
 facet qw( length minLength maxLength pattern enumeration whiteSpace ),
 declare AnyURI, as Types::Standard::Str,
 
-facet qw( length minLength maxLength pattern enumeration whiteSpace ),
+facet qw( lengthQName minLengthQName maxLengthQName pattern enumeration whiteSpace ),
 declare QName, as Types::Standard::StrMatch[qr{^(?:$XML::RegExp::QName)$}sm];
 
-facet qw( length minLength maxLength pattern enumeration whiteSpace ),
+facet qw( lengthQName minLengthQName maxLengthQName pattern enumeration whiteSpace ),
 declare Notation, as QName;
 
 facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusiveFloat maxExclusiveFloat minInclusiveFloat minExclusiveFloat ),
