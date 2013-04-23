@@ -90,6 +90,7 @@ sub dur_cmp
 	return undef;
 }
 
+our @patterns; my $pattern_i = -1;
 my %facets = (
 	length => sub {
 		my ($o, $var) = @_;
@@ -109,10 +110,8 @@ my %facets = (
 	pattern => sub {
 		my ($o, $var) = @_;
 		return unless exists $o->{pattern};
-		my $p = delete $o->{pattern};
-		$p =~ s/^"/"\^/;
-		$p =~ s/"$/\$"/;
-		sprintf('%s =~ m%ssm', $var, $p);
+		$patterns[++$pattern_i] = delete $o->{pattern};
+		sprintf('%s =~ $Types::XSD::patterns[%d]', $var, $pattern_i);
 	},
 	enumeration => sub {
 		my ($o, $var) = @_;
@@ -229,12 +228,12 @@ my %facets = (
 	totalDigits => sub {
 		my ($o, $var) = @_;
 		return unless exists $o->{totalDigits};
-		sprintf('do { my $tmp = %s; ($tmp=~tr/0-9//) <= %d }', $var, delete $o->{totalDigits});
+		sprintf('do { no warnings "uninitialized"; my $tmp = %s; ($tmp=~tr/0-9//) <= %d }', $var, delete $o->{totalDigits});
 	},
 	fractionDigits => sub {
 		my ($o, $var) = @_;
 		return unless exists $o->{fractionDigits};
-		sprintf('do { my (undef, $tmp) = split /\\./, %s; ($tmp=~tr/0-9//) <= %d }', $var, delete $o->{fractionDigits});
+		sprintf('do { no warnings "uninitialized"; my (undef, $tmp) = split /\\./, %s; ($tmp=~tr/0-9//) <= %d }', $var, delete $o->{fractionDigits});
 	},
 );
 
@@ -263,10 +262,11 @@ sub facet
 	
 	$self->{inline_generator} = $inline_generator;
 	$self->{constraint_generator} = sub {
-		eval sprintf(
+		my $sub = sprintf(
 			'sub { %s }',
 			$inline_generator->(@_)->($self, '$_[0]'),
 		);
+		eval($sub) or croak "could not build sub: $@\n\nCODE: $sub\n";
 	};
 #	$self->{name_generator} = sub {
 #		my ($s, %a) = @_;
@@ -308,11 +308,14 @@ sub dt_maker
 		"@code";
 	};
 	
-	my $type = declare(
-		$name,
+	my $type = "Type::Tiny"->new(
+		name       => $name,
+		library    => __PACKAGE__,
 		constraint => eval sprintf('sub { %s }', $inlined->(undef, '$_')),
 		inlined    => $inlined,
 	);
+	__PACKAGE__->add_type($type);
+	
 	facet(
 		qw( pattern whiteSpace enumeration maxInclusiveDT maxExclusiveDT minInclusiveDT minExclusiveDT ),
 		$type,
