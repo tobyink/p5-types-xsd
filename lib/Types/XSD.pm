@@ -500,7 +500,7 @@ facet qw( pattern enumeration whiteSpace maxInclusiveFloat maxExclusiveFloat min
 declare Double, as Types::Standard::Num;
 
 facet qw( length minLength maxLength pattern enumeration whiteSpace ),
-declare AnyURI, as Types::Standard::Str,
+declare AnyURI, as Types::Standard::Str;
 
 facet qw( lengthQName minLengthQName maxLengthQName pattern enumeration whiteSpace ),
 declare QName, as Types::Standard::StrMatch[qr{^(?:$XML::RegExp::QName)$}sm];
