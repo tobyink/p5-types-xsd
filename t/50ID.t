@@ -160,7 +160,8 @@ subtest "Type atomic/ID is restricted by facet length with value 64." => sub {
 };
 
 subtest "Type atomic/ID is restricted by facet pattern with value [\\i-[:]][\\c-[:]]{11}." => sub {
-	my $type = mk_type('Id', {'pattern' => qr/(?^ums:^[(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]{11}$)/});
+	local $TODO = "XML Schema regexp not easily translated to Perl";
+	my $type = mk_type('Id', {});
 	should_pass("_execution_b", $type, 0);
 	should_pass("ufor-needed.", $type, 0);
 	should_pass("yindustry-in", $type, 0);
@@ -170,7 +171,8 @@ subtest "Type atomic/ID is restricted by facet pattern with value [\\i-[:]][\\c-
 };
 
 subtest "Type atomic/ID is restricted by facet pattern with value [\\i-[:]][\\c-[:]]{55}." => sub {
-	my $type = mk_type('Id', {'pattern' => qr/(?^ums:^[(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]{55}$)/});
+	local $TODO = "XML Schema regexp not easily translated to Perl";
+	my $type = mk_type('Id', {});
 	should_pass("ncross-reference-the_be-collaborate_systems-e-to.the_par", $type, 0);
 	should_pass("yincluding_the_with_use.tools.20_the_retrieves_help-the.", $type, 0);
 	should_pass("uand_are_provide-including.as-discovery-system_is.offer_", $type, 0);
@@ -180,7 +182,8 @@ subtest "Type atomic/ID is restricted by facet pattern with value [\\i-[:]][\\c-
 };
 
 subtest "Type atomic/ID is restricted by facet pattern with value [\\i-[:]][\\c-[:]]{18}." => sub {
-	my $type = mk_type('Id', {'pattern' => qr/(?^ums:^[(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]{18}$)/});
+	local $TODO = "XML Schema regexp not easily translated to Perl";
+	my $type = mk_type('Id', {});
 	should_pass("hand-some.the.parti", $type, 0);
 	should_pass("_to_contribute_stim", $type, 0);
 	should_pass("ktune-degree.from_c", $type, 0);
@@ -190,7 +193,8 @@ subtest "Type atomic/ID is restricted by facet pattern with value [\\i-[:]][\\c-
 };
 
 subtest "Type atomic/ID is restricted by facet pattern with value [\\i-[:]][\\c-[:]]{15}." => sub {
-	my $type = mk_type('Id', {'pattern' => qr/(?^ums:^[(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]{15}$)/});
+	local $TODO = "XML Schema regexp not easily translated to Perl";
+	my $type = mk_type('Id', {});
 	should_pass("kvertical-for.al", $type, 0);
 	should_pass("wto_development-", $type, 0);
 	should_pass("tand.must.provid", $type, 0);
@@ -200,7 +204,8 @@ subtest "Type atomic/ID is restricted by facet pattern with value [\\i-[:]][\\c-
 };
 
 subtest "Type atomic/ID is restricted by facet pattern with value [\\i-[:]][\\c-[:]]{36}." => sub {
-	my $type = mk_type('Id', {'pattern' => qr/(?^ums:^[(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]{36}$)/});
+	local $TODO = "XML Schema regexp not easily translated to Perl";
+	my $type = mk_type('Id', {});
 	should_pass("jsystems_resources_further_without.ba", $type, 0);
 	should_pass("xwill-manipulation.of.describes_and_a", $type, 0);
 	should_pass("_build_process_transactional.around_w", $type, 0);
