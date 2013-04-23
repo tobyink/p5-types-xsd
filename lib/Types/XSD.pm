@@ -305,14 +305,15 @@ sub facet
 	my $self   = pop;
 	my @facets = @_;
 	my $regexp = qr{^${\(join "|", map quotemeta, @facets)}$}ms;
-			
+	my $name   = "$self";
+	
 	my $inline_generator = sub
 	{
 		my %p = @_;
 		return sub {
 			local $T = $_[0]->parent;
 			my $var  = $_[1];
-			sprintf(
+			my $r    = sprintf(
 				'(%s)',
 				join(
 					' and ',
@@ -320,6 +321,13 @@ sub facet
 					map($facets{$_}->(\%p, $var), @facets),
 				),
 			);
+			croak sprintf(
+				'Attempt to parameterize type "%s" with unrecognised parameter%s %s',
+				$name,
+				scalar(keys %p)==1 ? '' : 's',
+				join(", ", map(qq["$_"], sort keys %p)),
+			) if keys %p;
+			return $r;
 		};
 	};
 	
