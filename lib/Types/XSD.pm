@@ -438,7 +438,7 @@ facet qw( length minLength maxLength pattern enumeration whiteSpace ),
 declare Notation, as QName;
 
 facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusiveFloat maxExclusiveFloat minInclusiveFloat minExclusiveFloat ),
-declare Decimal, as Types::Standard::StrMatch[qr{^[+-]?[0-9]+(?:\.[0-9]+)?$}ism];
+declare Decimal, as Types::Standard::StrMatch[qr{^(?:(?:[+-]?[0-9]+(?:\.[0-9]+)?)|(?:[+-]?\.[0-9]+))$}ism];
 
 facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusive maxExclusive minInclusive minExclusive ),
 declare Integer, as Types::Standard::Int;

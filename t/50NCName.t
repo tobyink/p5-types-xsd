@@ -161,8 +161,7 @@ subtest "Type atomic/NCName is restricted by facet length with value 64." => sub
 };
 
 subtest "Type atomic/NCName is restricted by facet pattern with value [\\i-[:]][\\c-[:]]{16}." => sub {
-	local $TODO = "could not compile regexp";
-	my $type = mk_type('NCName', {});
+	my $type = mk_type('NCName', {'pattern' => qr/(?^ums:^[(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]{16}$)/});
 	should_pass("ta-reviewed-and-d", $type, 0);
 	should_pass("lwhich.high_parti", $type, 0);
 	should_pass("ias.software-a-th", $type, 0);
@@ -172,8 +171,7 @@ subtest "Type atomic/NCName is restricted by facet pattern with value [\\i-[:]][
 };
 
 subtest "Type atomic/NCName is restricted by facet pattern with value [\\i-[:]][\\c-[:]]{40}." => sub {
-	local $TODO = "could not compile regexp";
-	my $type = mk_type('NCName', {});
+	my $type = mk_type('NCName', {'pattern' => qr/(?^ums:^[(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]{40}$)/});
 	should_pass("onetworking-and_projector-of-tremendous_a", $type, 0);
 	should_pass("rinclude_the-a.the_developers-effort-well", $type, 0);
 	should_pass("wand.forensics.processes.etc_due_that-def", $type, 0);
@@ -183,8 +181,7 @@ subtest "Type atomic/NCName is restricted by facet pattern with value [\\i-[:]][
 };
 
 subtest "Type atomic/NCName is restricted by facet pattern with value [\\i-[:]][\\c-[:]]{27}." => sub {
-	local $TODO = "could not compile regexp";
-	my $type = mk_type('NCName', {});
+	my $type = mk_type('NCName', {'pattern' => qr/(?^ums:^[(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]{27}$)/});
 	should_pass("_a.tools.entire_revolution.o", $type, 0);
 	should_pass("lwill-will-industry_conforma", $type, 0);
 	should_pass("_the.the.industry.which.prob", $type, 0);
@@ -194,8 +191,7 @@ subtest "Type atomic/NCName is restricted by facet pattern with value [\\i-[:]][
 };
 
 subtest "Type atomic/NCName is restricted by facet pattern with value [\\i-[:]][\\c-[:]]{12}." => sub {
-	local $TODO = "could not compile regexp";
-	my $type = mk_type('NCName', {});
+	my $type = mk_type('NCName', {'pattern' => qr/(?^ums:^[(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]{12}$)/});
 	should_pass("oof-and-elect", $type, 0);
 	should_pass("_tests-domain", $type, 0);
 	should_pass("qthe.the-numb", $type, 0);
@@ -205,8 +201,7 @@ subtest "Type atomic/NCName is restricted by facet pattern with value [\\i-[:]][
 };
 
 subtest "Type atomic/NCName is restricted by facet pattern with value [\\i-[:]][\\c-[:]]{63}." => sub {
-	local $TODO = "could not compile regexp";
-	my $type = mk_type('NCName', {});
+	my $type = mk_type('NCName', {'pattern' => qr/(?^ums:^[(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]{63}$)/});
 	should_pass("_to.measurements_registries.would.will-success-testing.known.amb", $type, 0);
 	should_pass("bfor_will_creating.emerging.result-database-language-for_can-inc", $type, 0);
 	should_pass("gand.program_for-that-effective-process-a.and_standards.help-use", $type, 0);

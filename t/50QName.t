@@ -161,8 +161,7 @@ subtest "Type atomic/QName is restricted by facet length with value 64." => sub 
 };
 
 subtest "Type atomic/QName is restricted by facet pattern with value ([\\i-[:]][\\c-[:]]*:)?[\\i-[:]][\\c-[:]]{40}." => sub {
-	local $TODO = "could not compile regexp";
-	my $type = mk_type('QName', {});
+	my $type = mk_type('QName', {'pattern' => qr/(?^ums:^([(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]*:)?[(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]{40}$)/});
 	should_pass("mas_the.and-significant.find-way.environm", $type, 0);
 	should_pass("swork_must_and.partners-and:jmanage_and-of_partnerships.industry-prof", $type, 0);
 	should_pass("ithe.by.and.tools.software-adoption-in-wi", $type, 0);
@@ -172,8 +171,7 @@ subtest "Type atomic/QName is restricted by facet pattern with value ([\\i-[:]][
 };
 
 subtest "Type atomic/QName is restricted by facet pattern with value ([\\i-[:]][\\c-[:]]*:)?[\\i-[:]][\\c-[:]]{20}." => sub {
-	local $TODO = "could not compile regexp";
-	my $type = mk_type('QName', {});
+	my $type = mk_type('QName', {'pattern' => qr/(?^ums:^([(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]*:)?[(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]{20}$)/});
 	should_pass("ithat.and_for_the.in_", $type, 0);
 	should_pass("rwith_s.vir:ddevices.ensure.to_to", $type, 0);
 	should_pass("uknow_provide.must_in", $type, 0);
@@ -183,8 +181,7 @@ subtest "Type atomic/QName is restricted by facet pattern with value ([\\i-[:]][
 };
 
 subtest "Type atomic/QName is restricted by facet pattern with value ([\\i-[:]][\\c-[:]]*:)?[\\i-[:]][\\c-[:]]{33}." => sub {
-	local $TODO = "could not compile regexp";
-	my $type = mk_type('QName', {});
+	my $type = mk_type('QName', {'pattern' => qr/(?^ums:^([(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]*:)?[(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]{33}$)/});
 	should_pass("_buil:hby_to-of.to-computing_significant", $type, 0);
 	should_pass("boffer_draft.obtained-to_systems-g", $type, 0);
 	should_pass("_registry-both-understandi:opopular-processors.is-new_establi", $type, 0);
@@ -194,8 +191,7 @@ subtest "Type atomic/QName is restricted by facet pattern with value ([\\i-[:]][
 };
 
 subtest "Type atomic/QName is restricted by facet pattern with value ([\\i-[:]][\\c-[:]]*:)?[\\i-[:]][\\c-[:]]{27}." => sub {
-	local $TODO = "could not compile regexp";
-	my $type = mk_type('QName', {});
+	my $type = mk_type('QName', {'pattern' => qr/(?^ums:^([(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]*:)?[(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]{27}$)/});
 	should_pass("_known.embed:fdiscover.to.transactional-w", $type, 0);
 	should_pass("qg_o:oboth.to.location-that.of.sy", $type, 0);
 	should_pass("luser-and-that.business_inte", $type, 0);
@@ -205,8 +201,7 @@ subtest "Type atomic/QName is restricted by facet pattern with value ([\\i-[:]][
 };
 
 subtest "Type atomic/QName is restricted by facet pattern with value ([\\i-[:]][\\c-[:]]*:)?[\\i-[:]][\\c-[:]]{58}." => sub {
-	local $TODO = "could not compile regexp";
-	my $type = mk_type('QName', {});
+	my $type = mk_type('QName', {'pattern' => qr/(?^ums:^([(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]*:)?[(?:$XML::RegExp::NameChar)-[:]][(?:$XML::RegExp::NameChar)-[:]]{58}$)/});
 	should_pass("pare.to-debug-discover.hardware-information-is_frameworks_i", $type, 0);
 	should_pass("sall_ability.emerging-lacking_a.to-registry.are_retrieval_p", $type, 0);
 	should_pass("_original:efirst_intelligent_industries_who.repository-as.the_to.defi", $type, 0);

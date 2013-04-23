@@ -60,13 +60,15 @@ OUT
 			: ($facets{substr($_->tagName,3)} = $_->{value});
 	}
 	
-	my ($constraint) = grep "XS:\U$_" eq uc($base_type), "Types::XSD"->type_names;
+	my ($constraint) = grep lc("xs:$_") eq lc($base_type), "Types::XSD"->type_names;
 	if ( exists $facets{pattern} )
 	{
+		# XML regexes have these \c and \i things which we'll attempt to fake.
+		$facets{pattern} =~ s/\\c/(?:\$XML::RegExp::NameChar)/g;
+		$facets{pattern} =~ s/\\i/(?:\$XML::RegExp::NameChar)/g;
 		eval { $facets{pattern} = qr{^$facets{pattern}$}ms }
 		or do {
 			print $out "\tlocal \$TODO = \"could not compile regexp\";\n";
-			
 			delete($facets{pattern});
 		};
 	}
