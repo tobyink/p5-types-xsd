@@ -4,3 +4,10 @@
 	issued  2013-04-23;
 	label   "Preview release".
 
+`Types-XSD 0.000_02 cpan:TOBYINK`
+	issued  2013-04-24;
+	changeset [
+		item "Ensure that the regexps in test cases don't use any post-5.8 features."^^Bugfix;
+		item "Depend on a newer version of Type::Library. (We need the undocumented _mksub method!)"^^Packaging;
+	].
+
