@@ -688,16 +688,22 @@ defined in L<XML Schema|http://www.w3.org/TR/xmlschema-2/>. (The names of
 the type constraints are the same as the XML Schema data types, but
 capitalization often differs.)
 
-I've added some explainations of what some of the more interesting
-non-obvious types are:
+I've added some quick explainations of what each type is, but for details,
+see the XML Schema specification.
 
 =over
 
 =item C<< AnyType >>
 
+As per C<Any> from L<Types::Standard>.
+
 =item C<< AnySimpleType >>
 
+As per C<Value> from L<Types::Standard>.
+
 =item C<< String >>
+
+As per C<Str> from L<Types::Standard>.
 
 =item C<< NormalizedString >>
 
@@ -776,7 +782,11 @@ it is the length of the I<decoded> string which will be checked.
 
 =item C<< Float >>
 
+As per C<Num> from L<Types::Standard>.
+
 =item C<< Double >>
+
+As per C<Num> from L<Types::Standard>.
 
 =item C<< AnyURI >>
 
@@ -800,49 +810,96 @@ parameterization, they are silently ignored, as per the specification!
 
 =item C<< Decimal >>
 
+Numbers possibly including a decimal point, but not allowing exponential
+notation (e.g. C<< "3.14e-3" >>).
+
 =item C<< Integer >>
+
+As per C<Int> from L<Types::Standard>.
 
 =item C<< NonPositiveInteger >>
 
+An C<Integer> 0 or below.
+
 =item C<< NegativeInteger >>
+
+An C<Integer> -1 or below.
 
 =item C<< Long >>
 
+An C<Integer> between -9223372036854775808 and 9223372036854775807 (inclusive).
+
 =item C<< Int >>
+
+An C<Integer> between -2147483648 and 2147483647 (inclusive).
 
 =item C<< Short >>
 
+An C<Integer> between -32768 and 32767 (inclusive).
+
 =item C<< Byte >>
+
+An C<Integer> between -128 and 127 (inclusive).
 
 =item C<< NonNegativeInteger >>
 
+An C<Integer> 0 or above.
+
 =item C<< PositiveInteger >>
+
+An C<Integer> 1 or above.
 
 =item C<< UnsignedLong >>
 
+A C<NonNegativeInteger> between 0 and 18446744073709551615 (inclusive).
+
 =item C<< UnsignedInt >>
+
+A C<NonNegativeInteger> between 0 and 4294967295 (inclusive).
 
 =item C<< UnsignedShort >>
 
+A C<NonNegativeInteger> between 0 and 65535 (inclusive).
+
 =item C<< UnsignedByte >>
+
+A C<NonNegativeInteger> between 0 and 255 (inclusive).
 
 =item C<< Duration >>
 
+An ISO 8601 duration.
+
 =item C<< DateTime >>
+
+An ISO 8601 datetime with optional timezone.
 
 =item C<< Time >>
 
+An ISO 8601 time with optional timezone.
+
 =item C<< Date >>
+
+An ISO 8601 date with optional timezone.
 
 =item C<< GYearMonth >>
 
+An year-month pair with optional timezone.
+
 =item C<< GYear >>
+
+An year with optional timezone.
 
 =item C<< GMonthDay >>
 
+An month-day pair with optional timezone.
+
 =item C<< GDay >>
 
+An day with optional timezone.
+
 =item C<< GMonth >>
+
+An month pair with optional timezone.
 
 =back
 
