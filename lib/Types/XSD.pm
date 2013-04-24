@@ -106,7 +106,34 @@ sub b64_length
 }
 
 our @patterns;   my $pattern_i = -1;
+our @assertions; my $assertion_i = -1;
 my %facets = (
+	assertion => sub {
+		my ($o, $var) = @_;
+		return unless exists $o->{assertion};
+		my $ass = delete $o->{assertion};
+		$ass = [$ass] unless ref($ass) eq q(ARRAY);
+		my @r;
+		for my $a (@$ass)
+		{
+			require Types::TypeTiny;
+			if (Types::TypeTiny::CodeLike->check($a))
+			{
+				$assertion_i++;
+				$assertions[$assertion_i] = $a;
+				push @r, sprintf('$Types::XSD::assertions[%d]->(%s)', $assertion_i, $var);
+			}
+			elsif (Types::TypeTiny::StringLike->check($a))
+			{
+				push @r, ($var eq '$_') ? "do { $a }" : "do { local $_ = $var; $a }";
+			}
+			else
+			{
+				croak "assertions should be strings or coderefs";
+			}
+		}
+		join ' && ', map "($_)", @r;
+	},
 	length => sub {
 		my ($o, $var) = @_;
 		return unless exists $o->{length};
