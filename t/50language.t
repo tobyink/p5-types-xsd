@@ -160,7 +160,7 @@ subtest "Type atomic/language is restricted by facet length with value 11." => s
 };
 
 subtest "Type atomic/language is restricted by facet pattern with value ([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{3})*." => sub {
-	my $type = mk_type('Language', {'pattern' => qr/(?^ums:^([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{3})*$)/});
+	my $type = mk_type('Language', {'pattern' => qr/(?ms:^([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{3})*$)/});
 	should_pass("TE-USA", $type, 0);
 	should_pass("TG-USA", $type, 0);
 	should_pass("TH-USA", $type, 0);
@@ -170,7 +170,7 @@ subtest "Type atomic/language is restricted by facet pattern with value ([a-zA-Z
 };
 
 subtest "Type atomic/language is restricted by facet pattern with value ([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{3})*." => sub {
-	my $type = mk_type('Language', {'pattern' => qr/(?^ums:^([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{3})*$)/});
+	my $type = mk_type('Language', {'pattern' => qr/(?ms:^([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{3})*$)/});
 	should_pass("TL-USA", $type, 0);
 	should_pass("TN-USA", $type, 0);
 	should_pass("TO-USA", $type, 0);
@@ -180,7 +180,7 @@ subtest "Type atomic/language is restricted by facet pattern with value ([a-zA-Z
 };
 
 subtest "Type atomic/language is restricted by facet pattern with value ([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{3})*." => sub {
-	my $type = mk_type('Language', {'pattern' => qr/(?^ums:^([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{3})*$)/});
+	my $type = mk_type('Language', {'pattern' => qr/(?ms:^([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{3})*$)/});
 	should_pass("AS-USA", $type, 0);
 	should_pass("AY-USA", $type, 0);
 	should_pass("AZ-USA", $type, 0);
@@ -190,7 +190,7 @@ subtest "Type atomic/language is restricted by facet pattern with value ([a-zA-Z
 };
 
 subtest "Type atomic/language is restricted by facet pattern with value ([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{3})*." => sub {
-	my $type = mk_type('Language', {'pattern' => qr/(?^ums:^([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{3})*$)/});
+	my $type = mk_type('Language', {'pattern' => qr/(?ms:^([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{3})*$)/});
 	should_pass("SL-USA", $type, 0);
 	should_pass("SM-USA", $type, 0);
 	should_pass("SN-USA", $type, 0);
@@ -200,7 +200,7 @@ subtest "Type atomic/language is restricted by facet pattern with value ([a-zA-Z
 };
 
 subtest "Type atomic/language is restricted by facet pattern with value ([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{3})*." => sub {
-	my $type = mk_type('Language', {'pattern' => qr/(?^ums:^([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{3})*$)/});
+	my $type = mk_type('Language', {'pattern' => qr/(?ms:^([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{3})*$)/});
 	should_pass("WO-USA", $type, 0);
 	should_pass("XH-USA", $type, 0);
 	should_pass("YO-USA", $type, 0);

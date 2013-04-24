@@ -194,7 +194,7 @@ subtest "Type atomic/gYear is restricted by facet maxInclusive with value 2030."
 };
 
 subtest "Type atomic/gYear is restricted by facet pattern with value \\d\\d47." => sub {
-	my $type = mk_type('GYear', {'pattern' => qr/(?^ums:^\d\d47$)/});
+	my $type = mk_type('GYear', {'pattern' => qr/(?ms:^\d\d47$)/});
 	should_pass("2047", $type, 0);
 	should_pass("1847", $type, 0);
 	should_pass("2047", $type, 0);
@@ -204,7 +204,7 @@ subtest "Type atomic/gYear is restricted by facet pattern with value \\d\\d47." 
 };
 
 subtest "Type atomic/gYear is restricted by facet pattern with value \\d\\d61." => sub {
-	my $type = mk_type('GYear', {'pattern' => qr/(?^ums:^\d\d61$)/});
+	my $type = mk_type('GYear', {'pattern' => qr/(?ms:^\d\d61$)/});
 	should_pass("1961", $type, 0);
 	should_pass("1861", $type, 0);
 	should_pass("1761", $type, 0);
@@ -214,7 +214,7 @@ subtest "Type atomic/gYear is restricted by facet pattern with value \\d\\d61." 
 };
 
 subtest "Type atomic/gYear is restricted by facet pattern with value \\d\\d86." => sub {
-	my $type = mk_type('GYear', {'pattern' => qr/(?^ums:^\d\d86$)/});
+	my $type = mk_type('GYear', {'pattern' => qr/(?ms:^\d\d86$)/});
 	should_pass("2086", $type, 0);
 	should_pass("2086", $type, 0);
 	should_pass("1886", $type, 0);
@@ -224,7 +224,7 @@ subtest "Type atomic/gYear is restricted by facet pattern with value \\d\\d86." 
 };
 
 subtest "Type atomic/gYear is restricted by facet pattern with value \\d\\d14." => sub {
-	my $type = mk_type('GYear', {'pattern' => qr/(?^ums:^\d\d14$)/});
+	my $type = mk_type('GYear', {'pattern' => qr/(?ms:^\d\d14$)/});
 	should_pass("1814", $type, 0);
 	should_pass("1814", $type, 0);
 	should_pass("1914", $type, 0);
@@ -234,7 +234,7 @@ subtest "Type atomic/gYear is restricted by facet pattern with value \\d\\d14." 
 };
 
 subtest "Type atomic/gYear is restricted by facet pattern with value \\d\\d21." => sub {
-	my $type = mk_type('GYear', {'pattern' => qr/(?^ums:^\d\d21$)/});
+	my $type = mk_type('GYear', {'pattern' => qr/(?ms:^\d\d21$)/});
 	should_pass("1921", $type, 0);
 	should_pass("1821", $type, 0);
 	should_pass("1921", $type, 0);
@@ -496,7 +496,7 @@ subtest "Type atomic/gYear is restricted by facet maxExclusive with value 2030."
 };
 
 subtest "Type atomic/gYear is restricted by facet pattern with value \\d\\d06." => sub {
-	my $type = mk_type('GYear', {'pattern' => qr/(?^ums:^\d\d06$)/});
+	my $type = mk_type('GYear', {'pattern' => qr/(?ms:^\d\d06$)/});
 	should_fail("1835", $type, 0);
 	should_fail("1871", $type, 0);
 	should_fail("1999", $type, 0);
@@ -506,7 +506,7 @@ subtest "Type atomic/gYear is restricted by facet pattern with value \\d\\d06." 
 };
 
 subtest "Type atomic/gYear is restricted by facet pattern with value 19\\d\\d." => sub {
-	my $type = mk_type('GYear', {'pattern' => qr/(?^ums:^19\d\d$)/});
+	my $type = mk_type('GYear', {'pattern' => qr/(?ms:^19\d\d$)/});
 	should_fail("1802", $type, 0);
 	should_fail("2010", $type, 0);
 	should_fail("1825", $type, 0);
@@ -516,7 +516,7 @@ subtest "Type atomic/gYear is restricted by facet pattern with value 19\\d\\d." 
 };
 
 subtest "Type atomic/gYear is restricted by facet pattern with value 17\\d\\d." => sub {
-	my $type = mk_type('GYear', {'pattern' => qr/(?^ums:^17\d\d$)/});
+	my $type = mk_type('GYear', {'pattern' => qr/(?ms:^17\d\d$)/});
 	should_fail("1959", $type, 0);
 	should_fail("1934", $type, 0);
 	should_fail("1983", $type, 0);
@@ -526,7 +526,7 @@ subtest "Type atomic/gYear is restricted by facet pattern with value 17\\d\\d." 
 };
 
 subtest "Type atomic/gYear is restricted by facet pattern with value \\d\\d66." => sub {
-	my $type = mk_type('GYear', {'pattern' => qr/(?^ums:^\d\d66$)/});
+	my $type = mk_type('GYear', {'pattern' => qr/(?ms:^\d\d66$)/});
 	should_fail("2026", $type, 0);
 	should_fail("1928", $type, 0);
 	should_fail("1873", $type, 0);
@@ -536,7 +536,7 @@ subtest "Type atomic/gYear is restricted by facet pattern with value \\d\\d66." 
 };
 
 subtest "Type atomic/gYear is restricted by facet pattern with value \\d\\d77." => sub {
-	my $type = mk_type('GYear', {'pattern' => qr/(?^ums:^\d\d77$)/});
+	my $type = mk_type('GYear', {'pattern' => qr/(?ms:^\d\d77$)/});
 	should_fail("1802", $type, 0);
 	should_fail("1864", $type, 0);
 	should_fail("1851", $type, 0);

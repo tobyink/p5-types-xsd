@@ -190,7 +190,7 @@ subtest "Type atomic/gDay is restricted by facet maxInclusive with value ---31."
 };
 
 subtest "Type atomic/gDay is restricted by facet pattern with value ---\\d5." => sub {
-	my $type = mk_type('GDay', {'pattern' => qr/(?^ums:^---\d5$)/});
+	my $type = mk_type('GDay', {'pattern' => qr/(?ms:^---\d5$)/});
 	should_pass("---15", $type, 0);
 	should_pass("---15", $type, 0);
 	should_pass("---25", $type, 0);
@@ -200,7 +200,7 @@ subtest "Type atomic/gDay is restricted by facet pattern with value ---\\d5." =>
 };
 
 subtest "Type atomic/gDay is restricted by facet pattern with value ---\\d5." => sub {
-	my $type = mk_type('GDay', {'pattern' => qr/(?^ums:^---\d5$)/});
+	my $type = mk_type('GDay', {'pattern' => qr/(?ms:^---\d5$)/});
 	should_pass("---15", $type, 0);
 	should_pass("---25", $type, 0);
 	should_pass("---15", $type, 0);
@@ -210,7 +210,7 @@ subtest "Type atomic/gDay is restricted by facet pattern with value ---\\d5." =>
 };
 
 subtest "Type atomic/gDay is restricted by facet pattern with value ---0\\d." => sub {
-	my $type = mk_type('GDay', {'pattern' => qr/(?^ums:^---0\d$)/});
+	my $type = mk_type('GDay', {'pattern' => qr/(?ms:^---0\d$)/});
 	should_pass("---02", $type, 0);
 	should_pass("---03", $type, 0);
 	should_pass("---04", $type, 0);
@@ -220,7 +220,7 @@ subtest "Type atomic/gDay is restricted by facet pattern with value ---0\\d." =>
 };
 
 subtest "Type atomic/gDay is restricted by facet pattern with value ---\\d2." => sub {
-	my $type = mk_type('GDay', {'pattern' => qr/(?^ums:^---\d2$)/});
+	my $type = mk_type('GDay', {'pattern' => qr/(?ms:^---\d2$)/});
 	should_pass("---02", $type, 0);
 	should_pass("---22", $type, 0);
 	should_pass("---22", $type, 0);
@@ -230,7 +230,7 @@ subtest "Type atomic/gDay is restricted by facet pattern with value ---\\d2." =>
 };
 
 subtest "Type atomic/gDay is restricted by facet pattern with value ---1\\d." => sub {
-	my $type = mk_type('GDay', {'pattern' => qr/(?^ums:^---1\d$)/});
+	my $type = mk_type('GDay', {'pattern' => qr/(?ms:^---1\d$)/});
 	should_pass("---14", $type, 0);
 	should_pass("---13", $type, 0);
 	should_pass("---14", $type, 0);
@@ -478,7 +478,7 @@ subtest "Type atomic/gDay is restricted by facet maxExclusive with value ---31."
 };
 
 subtest "Type atomic/gDay is restricted by facet pattern with value ---2\\d." => sub {
-	my $type = mk_type('GDay', {'pattern' => qr/(?^ums:^---2\d$)/});
+	my $type = mk_type('GDay', {'pattern' => qr/(?ms:^---2\d$)/});
 	should_fail("---14", $type, 0);
 	should_fail("---10", $type, 0);
 	should_fail("---18", $type, 0);
@@ -488,7 +488,7 @@ subtest "Type atomic/gDay is restricted by facet pattern with value ---2\\d." =>
 };
 
 subtest "Type atomic/gDay is restricted by facet pattern with value ---\\d3." => sub {
-	my $type = mk_type('GDay', {'pattern' => qr/(?^ums:^---\d3$)/});
+	my $type = mk_type('GDay', {'pattern' => qr/(?ms:^---\d3$)/});
 	should_fail("---06", $type, 0);
 	should_fail("---05", $type, 0);
 	should_fail("---14", $type, 0);
@@ -498,7 +498,7 @@ subtest "Type atomic/gDay is restricted by facet pattern with value ---\\d3." =>
 };
 
 subtest "Type atomic/gDay is restricted by facet pattern with value ---\\d4." => sub {
-	my $type = mk_type('GDay', {'pattern' => qr/(?^ums:^---\d4$)/});
+	my $type = mk_type('GDay', {'pattern' => qr/(?ms:^---\d4$)/});
 	should_fail("---28", $type, 0);
 	should_fail("---13", $type, 0);
 	should_fail("---03", $type, 0);
@@ -508,7 +508,7 @@ subtest "Type atomic/gDay is restricted by facet pattern with value ---\\d4." =>
 };
 
 subtest "Type atomic/gDay is restricted by facet pattern with value ---0\\d." => sub {
-	my $type = mk_type('GDay', {'pattern' => qr/(?^ums:^---0\d$)/});
+	my $type = mk_type('GDay', {'pattern' => qr/(?ms:^---0\d$)/});
 	should_fail("---22", $type, 0);
 	should_fail("---10", $type, 0);
 	should_fail("---16", $type, 0);
@@ -518,7 +518,7 @@ subtest "Type atomic/gDay is restricted by facet pattern with value ---0\\d." =>
 };
 
 subtest "Type atomic/gDay is restricted by facet pattern with value ---1\\d." => sub {
-	my $type = mk_type('GDay', {'pattern' => qr/(?^ums:^---1\d$)/});
+	my $type = mk_type('GDay', {'pattern' => qr/(?ms:^---1\d$)/});
 	should_fail("---22", $type, 0);
 	should_fail("---02", $type, 0);
 	should_fail("---24", $type, 0);

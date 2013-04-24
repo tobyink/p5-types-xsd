@@ -160,7 +160,7 @@ subtest "Type atomic/token is restricted by facet length with value 1000." => su
 };
 
 subtest "Type atomic/token is restricted by facet pattern with value \\d{1,5}\\s([A-Z][a-z]{1,20}\\s){4}Street\\s([A-Z][a-z]{1,20}\\s){2},\\s[A-Z]{2}\\s15464." => sub {
-	my $type = mk_type('Token', {'pattern' => qr/(?^ums:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\s([A-Z][a-z]{1,20}\s){2},\s[A-Z]{2}\s15464$)/});
+	my $type = mk_type('Token', {'pattern' => qr/(?ms:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\s([A-Z][a-z]{1,20}\s){2},\s[A-Z]{2}\s15464$)/});
 	should_pass("47 On And Build Are Street Use Soc , SD 15464", $type, 0);
 	should_pass("5397 Xml Newcomers Program Technology Street The The , PA 15464", $type, 0);
 	should_pass("7764 Templates Into The Be Street Been Technologies , DE 15464", $type, 0);
@@ -170,7 +170,7 @@ subtest "Type atomic/token is restricted by facet pattern with value \\d{1,5}\\s
 };
 
 subtest "Type atomic/token is restricted by facet pattern with value \\d{1,5}\\s([A-Z][a-z]{1,20}\\s){4}Street\\s([A-Z][a-z]{1,20}\\s){3},\\s[A-Z]{2}\\s19851-1515." => sub {
-	my $type = mk_type('Token', {'pattern' => qr/(?^ums:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\s([A-Z][a-z]{1,20}\s){3},\s[A-Z]{2}\s19851-1515$)/});
+	my $type = mk_type('Token', {'pattern' => qr/(?ms:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\s([A-Z][a-z]{1,20}\s){3},\s[A-Z]{2}\s19851-1515$)/});
 	should_pass("289 Them And Means Aid Street Appropriate Needed Well , OR 19851-1515", $type, 0);
 	should_pass("7782 To Devices Pervasive Computed Street Information And Will , AZ 19851-1515", $type, 0);
 	should_pass("3 To Interoperability Nist And Street Its Revolution Oasis , ID 19851-1515", $type, 0);
@@ -180,7 +180,7 @@ subtest "Type atomic/token is restricted by facet pattern with value \\d{1,5}\\s
 };
 
 subtest "Type atomic/token is restricted by facet pattern with value \\d{1,5}\\s([A-Z][a-z]{1,20}\\s){4}Street\\s([A-Z][a-z]{1,20}\\s){3},\\s[A-Z]{2}\\s13653." => sub {
-	my $type = mk_type('Token', {'pattern' => qr/(?^ums:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\s([A-Z][a-z]{1,20}\s){3},\s[A-Z]{2}\s13653$)/});
+	my $type = mk_type('Token', {'pattern' => qr/(?ms:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\s([A-Z][a-z]{1,20}\s){3},\s[A-Z]{2}\s13653$)/});
 	should_pass("3243 Organizations Are Developed In Street Suites The For , MA 13653", $type, 0);
 	should_pass("59353 And Work Product Tools Street Is Well Base , NC 13653", $type, 0);
 	should_pass("47724 Object And Organization The Street Within Specifications Global , KS 13653", $type, 0);
@@ -190,7 +190,7 @@ subtest "Type atomic/token is restricted by facet pattern with value \\d{1,5}\\s
 };
 
 subtest "Type atomic/token is restricted by facet pattern with value \\d{1,5}\\s([A-Z][a-z]{1,20}\\s){3}Street\\s([A-Z][a-z]{1,20}\\s){2},\\s[A-Z]{2}\\s13573." => sub {
-	my $type = mk_type('Token', {'pattern' => qr/(?^ums:^\d{1,5}\s([A-Z][a-z]{1,20}\s){3}Street\s([A-Z][a-z]{1,20}\s){2},\s[A-Z]{2}\s13573$)/});
+	my $type = mk_type('Token', {'pattern' => qr/(?ms:^\d{1,5}\s([A-Z][a-z]{1,20}\s){3}Street\s([A-Z][a-z]{1,20}\s){2},\s[A-Z]{2}\s13573$)/});
 	should_pass("224 Assuring Discovery Areas Street Assuring Provided , NE 13573", $type, 0);
 	should_pass("1 The Impact Joint Street Of Testing , KS 13573", $type, 0);
 	should_pass("323 Java More And Street And Efforts , OK 13573", $type, 0);
@@ -200,7 +200,7 @@ subtest "Type atomic/token is restricted by facet pattern with value \\d{1,5}\\s
 };
 
 subtest "Type atomic/token is restricted by facet pattern with value \\d{1,5}\\s([A-Z][a-z]{1,20}\\s){2}Street\\s([A-Z][a-z]{1,20}\\s){2},\\s[A-Z]{2}\\s13926-1478." => sub {
-	my $type = mk_type('Token', {'pattern' => qr/(?^ums:^\d{1,5}\s([A-Z][a-z]{1,20}\s){2}Street\s([A-Z][a-z]{1,20}\s){2},\s[A-Z]{2}\s13926-1478$)/});
+	my $type = mk_type('Token', {'pattern' => qr/(?ms:^\d{1,5}\s([A-Z][a-z]{1,20}\s){2}Street\s([A-Z][a-z]{1,20}\s){2},\s[A-Z]{2}\s13926-1478$)/});
 	should_pass("4 Specification Repository Street As Of , MD 13926-1478", $type, 0);
 	should_pass("2547 And Of Street Testing Will , AZ 13926-1478", $type, 0);
 	should_pass("4353 Ec Improved Street Information Use , WY 13926-1478", $type, 0);

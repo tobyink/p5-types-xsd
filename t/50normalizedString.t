@@ -160,7 +160,7 @@ subtest "Type atomic/normalizedString is restricted by facet length with value 1
 };
 
 subtest "Type atomic/normalizedString is restricted by facet pattern with value \\d{1,5}\\s([A-Z][a-z]{1,20}\\s){4}Street\\s([A-Z][a-z]{1,20}\\s){1},\\s[A-Z]{2}\\s18037." => sub {
-	my $type = mk_type('NormalizedString', {'pattern' => qr/(?^ums:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\s([A-Z][a-z]{1,20}\s){1},\s[A-Z]{2}\s18037$)/});
+	my $type = mk_type('NormalizedString', {'pattern' => qr/(?ms:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\s([A-Z][a-z]{1,20}\s){1},\s[A-Z]{2}\s18037$)/});
 	should_pass("8259 Structured Participants And Of Street Forum , MT 18037", $type, 0);
 	should_pass("55 Improved Computing Future Such Street Individual , OR 18037", $type, 0);
 	should_pass("32 To And And Collaborate Street Organizations , DE 18037", $type, 0);
@@ -170,7 +170,7 @@ subtest "Type atomic/normalizedString is restricted by facet pattern with value 
 };
 
 subtest "Type atomic/normalizedString is restricted by facet pattern with value \\d{1,5}\\s([A-Z][a-z]{1,20}\\s){4}Street\\s([A-Z][a-z]{1,20}\\s){2},\\s[A-Z]{2}\\s11352." => sub {
-	my $type = mk_type('NormalizedString', {'pattern' => qr/(?^ums:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\s([A-Z][a-z]{1,20}\s){2},\s[A-Z]{2}\s11352$)/});
+	my $type = mk_type('NormalizedString', {'pattern' => qr/(?ms:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\s([A-Z][a-z]{1,20}\s){2},\s[A-Z]{2}\s11352$)/});
 	should_pass("63663 That These At Certain Street Meets Of , MI 11352", $type, 0);
 	should_pass("9568 Registry Standards Those Beta Street Of Organizations , IA 11352", $type, 0);
 	should_pass("637 For Issues Associated Guidelines Street Better Of , LA 11352", $type, 0);
@@ -180,7 +180,7 @@ subtest "Type atomic/normalizedString is restricted by facet pattern with value 
 };
 
 subtest "Type atomic/normalizedString is restricted by facet pattern with value \\d{1,5}\\s([A-Z][a-z]{1,20}\\s){4}Street\\s([A-Z][a-z]{1,20}\\s){3},\\s[A-Z]{2}\\s12317." => sub {
-	my $type = mk_type('NormalizedString', {'pattern' => qr/(?^ums:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\s([A-Z][a-z]{1,20}\s){3},\s[A-Z]{2}\s12317$)/});
+	my $type = mk_type('NormalizedString', {'pattern' => qr/(?ms:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\s([A-Z][a-z]{1,20}\s){3},\s[A-Z]{2}\s12317$)/});
 	should_pass("4 The Language That Reviewed Street Object Furthermore Not , AL 12317", $type, 0);
 	should_pass("382 This Academy Is Is Street For Accelerate Computing , NY 12317", $type, 0);
 	should_pass("437 Promises That Allow Xml Street The Software Review , UT 12317", $type, 0);
@@ -190,7 +190,7 @@ subtest "Type atomic/normalizedString is restricted by facet pattern with value 
 };
 
 subtest "Type atomic/normalizedString is restricted by facet pattern with value \\d{1,5}\\s([A-Z][a-z]{1,20}\\s){1}Street\\s([A-Z][a-z]{1,20}\\s){1},\\s[A-Z]{2}\\s17076." => sub {
-	my $type = mk_type('NormalizedString', {'pattern' => qr/(?^ums:^\d{1,5}\s([A-Z][a-z]{1,20}\s){1}Street\s([A-Z][a-z]{1,20}\s){1},\s[A-Z]{2}\s17076$)/});
+	my $type = mk_type('NormalizedString', {'pattern' => qr/(?ms:^\d{1,5}\s([A-Z][a-z]{1,20}\s){1}Street\s([A-Z][a-z]{1,20}\s){1},\s[A-Z]{2}\s17076$)/});
 	should_pass("5 Provide Street Location , SD 17076", $type, 0);
 	should_pass("81846 Reviewed Street By , IL 17076", $type, 0);
 	should_pass("537 Dom Street In , WI 17076", $type, 0);
@@ -200,7 +200,7 @@ subtest "Type atomic/normalizedString is restricted by facet pattern with value 
 };
 
 subtest "Type atomic/normalizedString is restricted by facet pattern with value \\d{1,5}\\s([A-Z][a-z]{1,20}\\s){1}Street\\s([A-Z][a-z]{1,20}\\s){3},\\s[A-Z]{2}\\s19099-1858." => sub {
-	my $type = mk_type('NormalizedString', {'pattern' => qr/(?^ums:^\d{1,5}\s([A-Z][a-z]{1,20}\s){1}Street\s([A-Z][a-z]{1,20}\s){3},\s[A-Z]{2}\s19099-1858$)/});
+	my $type = mk_type('NormalizedString', {'pattern' => qr/(?ms:^\d{1,5}\s([A-Z][a-z]{1,20}\s){1}Street\s([A-Z][a-z]{1,20}\s){3},\s[A-Z]{2}\s19099-1858$)/});
 	should_pass("3453 Of Street Do Of Security , NM 19099-1858", $type, 0);
 	should_pass("236 Industry Street Chi Standardization Tools , NE 19099-1858", $type, 0);
 	should_pass("154 Be Street Of Database Oasis , IL 19099-1858", $type, 0);

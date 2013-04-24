@@ -194,7 +194,7 @@ subtest "Type atomic/date is restricted by facet maxInclusive with value 2030-12
 };
 
 subtest "Type atomic/date is restricted by facet pattern with value \\d\\d58-0\\d-\\d8." => sub {
-	my $type = mk_type('Date', {'pattern' => qr/(?^ums:^\d\d58-0\d-\d8$)/});
+	my $type = mk_type('Date', {'pattern' => qr/(?ms:^\d\d58-0\d-\d8$)/});
 	should_pass("1858-06-28", $type, 0);
 	should_pass("1858-05-08", $type, 0);
 	should_pass("1958-02-08", $type, 0);
@@ -204,7 +204,7 @@ subtest "Type atomic/date is restricted by facet pattern with value \\d\\d58-0\\
 };
 
 subtest "Type atomic/date is restricted by facet pattern with value \\d\\d10-\\d4-1\\d." => sub {
-	my $type = mk_type('Date', {'pattern' => qr/(?^ums:^\d\d10-\d4-1\d$)/});
+	my $type = mk_type('Date', {'pattern' => qr/(?ms:^\d\d10-\d4-1\d$)/});
 	should_pass("1910-04-16", $type, 0);
 	should_pass("1710-04-16", $type, 0);
 	should_pass("1910-04-16", $type, 0);
@@ -214,7 +214,7 @@ subtest "Type atomic/date is restricted by facet pattern with value \\d\\d10-\\d
 };
 
 subtest "Type atomic/date is restricted by facet pattern with value \\d\\d90-\\d7-2\\d." => sub {
-	my $type = mk_type('Date', {'pattern' => qr/(?^ums:^\d\d90-\d7-2\d$)/});
+	my $type = mk_type('Date', {'pattern' => qr/(?ms:^\d\d90-\d7-2\d$)/});
 	should_pass("1890-07-24", $type, 0);
 	should_pass("2090-07-21", $type, 0);
 	should_pass("1990-07-23", $type, 0);
@@ -224,7 +224,7 @@ subtest "Type atomic/date is restricted by facet pattern with value \\d\\d90-\\d
 };
 
 subtest "Type atomic/date is restricted by facet pattern with value 17\\d\\d-\\d0-1\\d." => sub {
-	my $type = mk_type('Date', {'pattern' => qr/(?^ums:^17\d\d-\d0-1\d$)/});
+	my $type = mk_type('Date', {'pattern' => qr/(?ms:^17\d\d-\d0-1\d$)/});
 	should_pass("1748-10-16", $type, 0);
 	should_pass("1731-10-17", $type, 0);
 	should_pass("1734-10-17", $type, 0);
@@ -234,7 +234,7 @@ subtest "Type atomic/date is restricted by facet pattern with value 17\\d\\d-\\d
 };
 
 subtest "Type atomic/date is restricted by facet pattern with value \\d\\d44-\\d2-\\d5." => sub {
-	my $type = mk_type('Date', {'pattern' => qr/(?^ums:^\d\d44-\d2-\d5$)/});
+	my $type = mk_type('Date', {'pattern' => qr/(?ms:^\d\d44-\d2-\d5$)/});
 	should_pass("1844-02-15", $type, 0);
 	should_pass("1744-02-05", $type, 0);
 	should_pass("1944-02-05", $type, 0);
@@ -496,7 +496,7 @@ subtest "Type atomic/date is restricted by facet maxExclusive with value 2030-12
 };
 
 subtest "Type atomic/date is restricted by facet pattern with value \\d\\d54-0\\d-\\d8." => sub {
-	my $type = mk_type('Date', {'pattern' => qr/(?^ums:^\d\d54-0\d-\d8$)/});
+	my $type = mk_type('Date', {'pattern' => qr/(?ms:^\d\d54-0\d-\d8$)/});
 	should_fail("1842-11-10", $type, 0);
 	should_fail("1944-12-23", $type, 0);
 	should_fail("1940-11-25", $type, 0);
@@ -506,7 +506,7 @@ subtest "Type atomic/date is restricted by facet pattern with value \\d\\d54-0\\
 };
 
 subtest "Type atomic/date is restricted by facet pattern with value \\d\\d79-0\\d-\\d5." => sub {
-	my $type = mk_type('Date', {'pattern' => qr/(?^ums:^\d\d79-0\d-\d5$)/});
+	my $type = mk_type('Date', {'pattern' => qr/(?ms:^\d\d79-0\d-\d5$)/});
 	should_fail("1817-10-11", $type, 0);
 	should_fail("1994-12-07", $type, 0);
 	should_fail("1712-10-24", $type, 0);
@@ -516,7 +516,7 @@ subtest "Type atomic/date is restricted by facet pattern with value \\d\\d79-0\\
 };
 
 subtest "Type atomic/date is restricted by facet pattern with value \\d\\d35-0\\d-\\d7." => sub {
-	my $type = mk_type('Date', {'pattern' => qr/(?^ums:^\d\d35-0\d-\d7$)/});
+	my $type = mk_type('Date', {'pattern' => qr/(?ms:^\d\d35-0\d-\d7$)/});
 	should_fail("1910-10-18", $type, 0);
 	should_fail("1939-11-06", $type, 0);
 	should_fail("2011-11-22", $type, 0);
@@ -526,7 +526,7 @@ subtest "Type atomic/date is restricted by facet pattern with value \\d\\d35-0\\
 };
 
 subtest "Type atomic/date is restricted by facet pattern with value 19\\d\\d-\\d0-2\\d." => sub {
-	my $type = mk_type('Date', {'pattern' => qr/(?^ums:^19\d\d-\d0-2\d$)/});
+	my $type = mk_type('Date', {'pattern' => qr/(?ms:^19\d\d-\d0-2\d$)/});
 	should_fail("1868-04-03", $type, 0);
 	should_fail("1775-08-02", $type, 0);
 	should_fail("1816-07-12", $type, 0);
@@ -536,7 +536,7 @@ subtest "Type atomic/date is restricted by facet pattern with value 19\\d\\d-\\d
 };
 
 subtest "Type atomic/date is restricted by facet pattern with value \\d\\d32-0\\d-\\d7." => sub {
-	my $type = mk_type('Date', {'pattern' => qr/(?^ums:^\d\d32-0\d-\d7$)/});
+	my $type = mk_type('Date', {'pattern' => qr/(?ms:^\d\d32-0\d-\d7$)/});
 	should_fail("2039-11-14", $type, 0);
 	should_fail("1914-11-02", $type, 0);
 	should_fail("1992-11-13", $type, 0);

@@ -160,7 +160,7 @@ subtest "Type atomic/NMTOKEN is restricted by facet length with value 64." => su
 };
 
 subtest "Type atomic/NMTOKEN is restricted by facet pattern with value \\c{40}." => sub {
-	my $type = mk_type('NmToken', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar){40}$)/});
+	my $type = mk_type('NmToken', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar){40}$)/});
 	should_pass("participants.file-interconnecting_will.v", $type, 0);
 	should_pass("computer.systems_their:wide.the:assuring", $type, 0);
 	should_pass("provides.facilitates:known-discussions:o", $type, 0);
@@ -170,7 +170,7 @@ subtest "Type atomic/NMTOKEN is restricted by facet pattern with value \\c{40}."
 };
 
 subtest "Type atomic/NMTOKEN is restricted by facet pattern with value \\c{18}." => sub {
-	my $type = mk_type('NmToken', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar){18}$)/});
+	my $type = mk_type('NmToken', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar){18}$)/});
 	should_pass("in.typical_tools:m", $type, 0);
 	should_pass("and:Conformance:to", $type, 0);
 	should_pass("tests.clean:succes", $type, 0);
@@ -180,7 +180,7 @@ subtest "Type atomic/NMTOKEN is restricted by facet pattern with value \\c{18}."
 };
 
 subtest "Type atomic/NMTOKEN is restricted by facet pattern with value \\c{6}." => sub {
-	my $type = mk_type('NmToken', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar){6}$)/});
+	my $type = mk_type('NmToken', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar){6}$)/});
 	should_pass("for_AP", $type, 0);
 	should_pass("XML.to", $type, 0);
 	should_pass("to-Too", $type, 0);
@@ -190,7 +190,7 @@ subtest "Type atomic/NMTOKEN is restricted by facet pattern with value \\c{6}." 
 };
 
 subtest "Type atomic/NMTOKEN is restricted by facet pattern with value \\c{33}." => sub {
-	my $type = mk_type('NmToken', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar){33}$)/});
+	my $type = mk_type('NmToken', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar){33}$)/});
 	should_pass("small-.and.for.these-for:Provide-", $type, 0);
 	should_pass("if_discovery.to_allow-vocabulary_", $type, 0);
 	should_pass("nature.participate.to-key.contrib", $type, 0);
@@ -200,7 +200,7 @@ subtest "Type atomic/NMTOKEN is restricted by facet pattern with value \\c{33}."
 };
 
 subtest "Type atomic/NMTOKEN is restricted by facet pattern with value \\c{18}." => sub {
-	my $type = mk_type('NmToken', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar){18}$)/});
+	my $type = mk_type('NmToken', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar){18}$)/});
 	should_pass("include_internatio", $type, 0);
 	should_pass("repositories.use:c", $type, 0);
 	should_pass("annual-data.a:lies", $type, 0);

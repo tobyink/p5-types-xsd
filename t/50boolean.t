@@ -10,7 +10,7 @@ use Types::XSD;
 sub mk_type { "Types::XSD"->get_type($_[0])->parameterize(%{$_[1]}) }
 
 subtest "Type atomic/boolean is restricted by facet pattern with value [1]{1}." => sub {
-	my $type = mk_type('Boolean', {'pattern' => qr/(?^ums:^[1]{1}$)/});
+	my $type = mk_type('Boolean', {'pattern' => qr/(?ms:^[1]{1}$)/});
 	should_pass("1", $type, 0);
 	should_pass("1", $type, 0);
 	should_pass("1", $type, 0);
@@ -20,7 +20,7 @@ subtest "Type atomic/boolean is restricted by facet pattern with value [1]{1}." 
 };
 
 subtest "Type atomic/boolean is restricted by facet pattern with value false." => sub {
-	my $type = mk_type('Boolean', {'pattern' => qr/(?^ums:^false$)/});
+	my $type = mk_type('Boolean', {'pattern' => qr/(?ms:^false$)/});
 	should_pass("false", $type, 0);
 	should_pass("false", $type, 0);
 	should_pass("false", $type, 0);
@@ -30,7 +30,7 @@ subtest "Type atomic/boolean is restricted by facet pattern with value false." =
 };
 
 subtest "Type atomic/boolean is restricted by facet pattern with value [1]{1}." => sub {
-	my $type = mk_type('Boolean', {'pattern' => qr/(?^ums:^[1]{1}$)/});
+	my $type = mk_type('Boolean', {'pattern' => qr/(?ms:^[1]{1}$)/});
 	should_pass("1", $type, 0);
 	should_pass("1", $type, 0);
 	should_pass("1", $type, 0);
@@ -40,7 +40,7 @@ subtest "Type atomic/boolean is restricted by facet pattern with value [1]{1}." 
 };
 
 subtest "Type atomic/boolean is restricted by facet pattern with value false." => sub {
-	my $type = mk_type('Boolean', {'pattern' => qr/(?^ums:^false$)/});
+	my $type = mk_type('Boolean', {'pattern' => qr/(?ms:^false$)/});
 	should_pass("false", $type, 0);
 	should_pass("false", $type, 0);
 	should_pass("false", $type, 0);
@@ -50,7 +50,7 @@ subtest "Type atomic/boolean is restricted by facet pattern with value false." =
 };
 
 subtest "Type atomic/boolean is restricted by facet pattern with value [1]{1}." => sub {
-	my $type = mk_type('Boolean', {'pattern' => qr/(?^ums:^[1]{1}$)/});
+	my $type = mk_type('Boolean', {'pattern' => qr/(?ms:^[1]{1}$)/});
 	should_pass("1", $type, 0);
 	should_pass("1", $type, 0);
 	should_pass("1", $type, 0);

@@ -160,7 +160,7 @@ subtest "Type atomic/base64Binary is restricted by facet length with value 74." 
 };
 
 subtest "Type atomic/base64Binary is restricted by facet pattern with value [a-zA-Z0-9+/]{20}." => sub {
-	my $type = mk_type('Base64Binary', {'pattern' => qr/(?^ums:^[a-zA-Z0-9+\/]{20}$)/});
+	my $type = mk_type('Base64Binary', {'pattern' => qr/(?ms:^[a-zA-Z0-9+\/]{20}$)/});
 	should_pass("dGRoYWx5anVnZnRydGRl", $type, 0);
 	should_pass("dnBtZWFvZHNkcWNjbHBx", $type, 0);
 	should_pass("bWhqcWdjd2ZwdGtjbXJs", $type, 0);
@@ -170,7 +170,7 @@ subtest "Type atomic/base64Binary is restricted by facet pattern with value [a-z
 };
 
 subtest "Type atomic/base64Binary is restricted by facet pattern with value [a-zA-Z0-9+/]{68}." => sub {
-	my $type = mk_type('Base64Binary', {'pattern' => qr/(?^ums:^[a-zA-Z0-9+\/]{68}$)/});
+	my $type = mk_type('Base64Binary', {'pattern' => qr/(?ms:^[a-zA-Z0-9+\/]{68}$)/});
 	should_pass("ZWxxdXJyanJuanFodGZ3Z25sc3VrZGJ0cGp5dHFoaGJxYmVyZ2RpbXl0c3NueWJpdXVq", $type, 0);
 	should_pass("eGpycXh2dXFsa3lsbWtwcWt4d2hkcHVicXFlcWp2b2FtcGRucmNmbmFwcHFpcG9tdm9j", $type, 0);
 	should_pass("Y2V5c2dic3R0Z3V0eHdwb3JlY2hmbGlkZW9yb25xZGl1aXZsaG9mcGVrdnd4bXlid3Fv", $type, 0);
@@ -180,7 +180,7 @@ subtest "Type atomic/base64Binary is restricted by facet pattern with value [a-z
 };
 
 subtest "Type atomic/base64Binary is restricted by facet pattern with value [a-zA-Z0-9+/]{64}." => sub {
-	my $type = mk_type('Base64Binary', {'pattern' => qr/(?^ums:^[a-zA-Z0-9+\/]{64}$)/});
+	my $type = mk_type('Base64Binary', {'pattern' => qr/(?ms:^[a-zA-Z0-9+\/]{64}$)/});
 	should_pass("b21pbWV3Ym9ibm1pbnBmdGdyYnl1Ymxybm9kcGhqbXNydmthamFocGtwaW55b2t1", $type, 0);
 	should_pass("dGx4aHlyaWxkY29hc25md3hqZnBnc214Ymlwb2t1dGdvZnNjaWljY3N1Z2NuZnB4", $type, 0);
 	should_pass("aXRhcmxvbW9lZW1zaGR3ZnF1ZW5jdHdjdG9hZmxvdnV4dWtseHd3YmJybWl1aGJo", $type, 0);
@@ -190,7 +190,7 @@ subtest "Type atomic/base64Binary is restricted by facet pattern with value [a-z
 };
 
 subtest "Type atomic/base64Binary is restricted by facet pattern with value [a-zA-Z0-9+/]{24}." => sub {
-	my $type = mk_type('Base64Binary', {'pattern' => qr/(?^ums:^[a-zA-Z0-9+\/]{24}$)/});
+	my $type = mk_type('Base64Binary', {'pattern' => qr/(?ms:^[a-zA-Z0-9+\/]{24}$)/});
 	should_pass("bmxscXJ5bWRpeWJraWxybW1l", $type, 0);
 	should_pass("cmRnd3drb291cWhnaGFpdGZz", $type, 0);
 	should_pass("ZGJ4cHFzdnVxZXd5a2RvZnJz", $type, 0);
@@ -200,7 +200,7 @@ subtest "Type atomic/base64Binary is restricted by facet pattern with value [a-z
 };
 
 subtest "Type atomic/base64Binary is restricted by facet pattern with value [a-zA-Z0-9+/]{60}." => sub {
-	my $type = mk_type('Base64Binary', {'pattern' => qr/(?^ums:^[a-zA-Z0-9+\/]{60}$)/});
+	my $type = mk_type('Base64Binary', {'pattern' => qr/(?ms:^[a-zA-Z0-9+\/]{60}$)/});
 	should_pass("a2dicW9mY29ybWdjb2tycGRscWNxamp0ZWxxbWlzaXFrZm9oZ2twdWR5eHh5", $type, 0);
 	should_pass("c3V1d2ZqdHJ1eG1nZm1kdHN4bWtoYXdrdWNzbGhrdmhxc2R5Y2tpb25lbXZx", $type, 0);
 	should_pass("a2VzdXZub2hscG53aHZsdml4aGZxdGZ3aXl3cmRocXdkcmNuaWpxZGVpYmlx", $type, 0);

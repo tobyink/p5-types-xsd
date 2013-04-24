@@ -234,7 +234,7 @@ subtest "Type atomic/byte is restricted by facet totalDigits with value 3." => s
 };
 
 subtest "Type atomic/byte is restricted by facet pattern with value \\-\\d{3}." => sub {
-	my $type = mk_type('Byte', {'pattern' => qr/(?^ums:^\-\d{3}$)/});
+	my $type = mk_type('Byte', {'pattern' => qr/(?ms:^\-\d{3}$)/});
 	should_pass("-113", $type, 0);
 	should_pass("-114", $type, 0);
 	should_pass("-113", $type, 0);
@@ -244,7 +244,7 @@ subtest "Type atomic/byte is restricted by facet pattern with value \\-\\d{3}." 
 };
 
 subtest "Type atomic/byte is restricted by facet pattern with value \\-\\d{2}." => sub {
-	my $type = mk_type('Byte', {'pattern' => qr/(?^ums:^\-\d{2}$)/});
+	my $type = mk_type('Byte', {'pattern' => qr/(?ms:^\-\d{2}$)/});
 	should_pass("-84", $type, 0);
 	should_pass("-58", $type, 0);
 	should_pass("-64", $type, 0);
@@ -254,7 +254,7 @@ subtest "Type atomic/byte is restricted by facet pattern with value \\-\\d{2}." 
 };
 
 subtest "Type atomic/byte is restricted by facet pattern with value \\-\\d{1}." => sub {
-	my $type = mk_type('Byte', {'pattern' => qr/(?^ums:^\-\d{1}$)/});
+	my $type = mk_type('Byte', {'pattern' => qr/(?ms:^\-\d{1}$)/});
 	should_pass("-4", $type, 0);
 	should_pass("-4", $type, 0);
 	should_pass("-1", $type, 0);
@@ -264,7 +264,7 @@ subtest "Type atomic/byte is restricted by facet pattern with value \\-\\d{1}." 
 };
 
 subtest "Type atomic/byte is restricted by facet pattern with value \\d{1}." => sub {
-	my $type = mk_type('Byte', {'pattern' => qr/(?^ums:^\d{1}$)/});
+	my $type = mk_type('Byte', {'pattern' => qr/(?ms:^\d{1}$)/});
 	should_pass("8", $type, 0);
 	should_pass("2", $type, 0);
 	should_pass("6", $type, 0);
@@ -274,7 +274,7 @@ subtest "Type atomic/byte is restricted by facet pattern with value \\d{1}." => 
 };
 
 subtest "Type atomic/byte is restricted by facet pattern with value \\d{3}." => sub {
-	my $type = mk_type('Byte', {'pattern' => qr/(?^ums:^\d{3}$)/});
+	my $type = mk_type('Byte', {'pattern' => qr/(?ms:^\d{3}$)/});
 	should_pass("114", $type, 0);
 	should_pass("113", $type, 0);
 	should_pass("113", $type, 0);
@@ -556,7 +556,7 @@ subtest "Type atomic/byte is restricted by facet maxExclusive with value 127." =
 };
 
 subtest "Type atomic/byte is restricted by facet pattern with value \\-\\d{3}." => sub {
-	my $type = mk_type('Byte', {'pattern' => qr/(?^ums:^\-\d{3}$)/});
+	my $type = mk_type('Byte', {'pattern' => qr/(?ms:^\-\d{3}$)/});
 	should_fail("32", $type, 0);
 	should_fail("3", $type, 0);
 	should_fail("9", $type, 0);
@@ -566,7 +566,7 @@ subtest "Type atomic/byte is restricted by facet pattern with value \\-\\d{3}." 
 };
 
 subtest "Type atomic/byte is restricted by facet pattern with value \\-\\d{2}." => sub {
-	my $type = mk_type('Byte', {'pattern' => qr/(?^ums:^\-\d{2}$)/});
+	my $type = mk_type('Byte', {'pattern' => qr/(?ms:^\-\d{2}$)/});
 	should_fail("115", $type, 0);
 	should_fail("-112", $type, 0);
 	should_fail("-113", $type, 0);
@@ -576,7 +576,7 @@ subtest "Type atomic/byte is restricted by facet pattern with value \\-\\d{2}." 
 };
 
 subtest "Type atomic/byte is restricted by facet pattern with value \\-\\d{1}." => sub {
-	my $type = mk_type('Byte', {'pattern' => qr/(?^ums:^\-\d{1}$)/});
+	my $type = mk_type('Byte', {'pattern' => qr/(?ms:^\-\d{1}$)/});
 	should_fail("63", $type, 0);
 	should_fail("-86", $type, 0);
 	should_fail("111", $type, 0);
@@ -586,7 +586,7 @@ subtest "Type atomic/byte is restricted by facet pattern with value \\-\\d{1}." 
 };
 
 subtest "Type atomic/byte is restricted by facet pattern with value \\d{1}." => sub {
-	my $type = mk_type('Byte', {'pattern' => qr/(?^ums:^\d{1}$)/});
+	my $type = mk_type('Byte', {'pattern' => qr/(?ms:^\d{1}$)/});
 	should_fail("-115", $type, 0);
 	should_fail("72", $type, 0);
 	should_fail("-112", $type, 0);
@@ -596,7 +596,7 @@ subtest "Type atomic/byte is restricted by facet pattern with value \\d{1}." => 
 };
 
 subtest "Type atomic/byte is restricted by facet pattern with value \\d{3}." => sub {
-	my $type = mk_type('Byte', {'pattern' => qr/(?^ums:^\d{3}$)/});
+	my $type = mk_type('Byte', {'pattern' => qr/(?ms:^\d{3}$)/});
 	should_fail("24", $type, 0);
 	should_fail("1", $type, 0);
 	should_fail("-25", $type, 0);

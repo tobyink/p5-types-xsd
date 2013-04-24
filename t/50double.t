@@ -10,7 +10,7 @@ use Types::XSD;
 sub mk_type { "Types::XSD"->get_type($_[0])->parameterize(%{$_[1]}) }
 
 subtest "Type atomic/double is restricted by facet pattern with value \\d{1}E\\-\\d{3}." => sub {
-	my $type = mk_type('Double', {'pattern' => qr/(?^ums:^\d{1}E\-\d{3}$)/});
+	my $type = mk_type('Double', {'pattern' => qr/(?ms:^\d{1}E\-\d{3}$)/});
 	should_pass("4E-289", $type, 0);
 	should_pass("3E-238", $type, 0);
 	should_pass("2E-173", $type, 0);
@@ -20,7 +20,7 @@ subtest "Type atomic/double is restricted by facet pattern with value \\d{1}E\\-
 };
 
 subtest "Type atomic/double is restricted by facet pattern with value \\d{1}\\.\\d{4}E\\-\\d{2}." => sub {
-	my $type = mk_type('Double', {'pattern' => qr/(?^ums:^\d{1}\.\d{4}E\-\d{2}$)/});
+	my $type = mk_type('Double', {'pattern' => qr/(?ms:^\d{1}\.\d{4}E\-\d{2}$)/});
 	should_pass("5.2185E-22", $type, 0);
 	should_pass("4.3272E-51", $type, 0);
 	should_pass("3.1138E-51", $type, 0);
@@ -30,7 +30,7 @@ subtest "Type atomic/double is restricted by facet pattern with value \\d{1}\\.\
 };
 
 subtest "Type atomic/double is restricted by facet pattern with value \\d{1}\\.\\d{8}E\\-\\d{1}." => sub {
-	my $type = mk_type('Double', {'pattern' => qr/(?^ums:^\d{1}\.\d{8}E\-\d{1}$)/});
+	my $type = mk_type('Double', {'pattern' => qr/(?ms:^\d{1}\.\d{8}E\-\d{1}$)/});
 	should_pass("4.54918975E-8", $type, 0);
 	should_pass("9.82585255E-8", $type, 0);
 	should_pass("7.42727726E-4", $type, 0);
@@ -40,7 +40,7 @@ subtest "Type atomic/double is restricted by facet pattern with value \\d{1}\\.\
 };
 
 subtest "Type atomic/double is restricted by facet pattern with value \\d{1}\\.\\d{12}E\\d{1}." => sub {
-	my $type = mk_type('Double', {'pattern' => qr/(?^ums:^\d{1}\.\d{12}E\d{1}$)/});
+	my $type = mk_type('Double', {'pattern' => qr/(?ms:^\d{1}\.\d{12}E\d{1}$)/});
 	should_pass("4.319926813832E4", $type, 0);
 	should_pass("4.462166867158E3", $type, 0);
 	should_pass("4.642845497493E5", $type, 0);
@@ -50,7 +50,7 @@ subtest "Type atomic/double is restricted by facet pattern with value \\d{1}\\.\
 };
 
 subtest "Type atomic/double is restricted by facet pattern with value \\d{1}\\.\\d{16}E\\d{3}." => sub {
-	my $type = mk_type('Double', {'pattern' => qr/(?^ums:^\d{1}\.\d{16}E\d{3}$)/});
+	my $type = mk_type('Double', {'pattern' => qr/(?ms:^\d{1}\.\d{16}E\d{3}$)/});
 	should_pass("8.9765779385971216E261", $type, 0);
 	should_pass("6.8222841673422587E283", $type, 0);
 	should_pass("4.9578685246487246E116", $type, 0);
@@ -130,7 +130,7 @@ subtest "Type atomic/double is restricted by facet whiteSpace with value collaps
 };
 
 subtest "Type atomic/double is restricted by facet pattern with value \\d{1}E\\-\\d{3}." => sub {
-	my $type = mk_type('Double', {'pattern' => qr/(?^ums:^\d{1}E\-\d{3}$)/});
+	my $type = mk_type('Double', {'pattern' => qr/(?ms:^\d{1}E\-\d{3}$)/});
 	should_fail("3E6", $type, 0);
 	should_fail("1E-12", $type, 0);
 	should_fail("5E-47", $type, 0);
@@ -140,7 +140,7 @@ subtest "Type atomic/double is restricted by facet pattern with value \\d{1}E\\-
 };
 
 subtest "Type atomic/double is restricted by facet pattern with value \\d{1}\\.\\d{4}E\\-\\d{2}." => sub {
-	my $type = mk_type('Double', {'pattern' => qr/(?^ums:^\d{1}\.\d{4}E\-\d{2}$)/});
+	my $type = mk_type('Double', {'pattern' => qr/(?ms:^\d{1}\.\d{4}E\-\d{2}$)/});
 	should_fail("5.532777422E-262", $type, 0);
 	should_fail("4.84496778864735E7", $type, 0);
 	should_fail("3.3664231457E-8", $type, 0);
@@ -150,7 +150,7 @@ subtest "Type atomic/double is restricted by facet pattern with value \\d{1}\\.\
 };
 
 subtest "Type atomic/double is restricted by facet pattern with value \\d{1}\\.\\d{8}E\\-\\d{1}." => sub {
-	my $type = mk_type('Double', {'pattern' => qr/(?^ums:^\d{1}\.\d{8}E\-\d{1}$)/});
+	my $type = mk_type('Double', {'pattern' => qr/(?ms:^\d{1}\.\d{8}E\-\d{1}$)/});
 	should_fail("2.938778577292527E-112", $type, 0);
 	should_fail("8.687E-228", $type, 0);
 	should_fail("7.2552325433887758E57", $type, 0);
@@ -160,7 +160,7 @@ subtest "Type atomic/double is restricted by facet pattern with value \\d{1}\\.\
 };
 
 subtest "Type atomic/double is restricted by facet pattern with value \\d{1}\\.\\d{12}E\\d{1}." => sub {
-	my $type = mk_type('Double', {'pattern' => qr/(?^ums:^\d{1}\.\d{12}E\d{1}$)/});
+	my $type = mk_type('Double', {'pattern' => qr/(?ms:^\d{1}\.\d{12}E\d{1}$)/});
 	should_fail("7.377E277", $type, 0);
 	should_fail("7.44122758643E172", $type, 0);
 	should_fail("5.37737654663E193", $type, 0);
@@ -170,7 +170,7 @@ subtest "Type atomic/double is restricted by facet pattern with value \\d{1}\\.\
 };
 
 subtest "Type atomic/double is restricted by facet pattern with value \\d{1}\\.\\d{16}E\\d{3}." => sub {
-	my $type = mk_type('Double', {'pattern' => qr/(?^ums:^\d{1}\.\d{16}E\d{3}$)/});
+	my $type = mk_type('Double', {'pattern' => qr/(?ms:^\d{1}\.\d{16}E\d{3}$)/});
 	should_fail("8.9396649815531E32", $type, 0);
 	should_fail("7.2936652792E4", $type, 0);
 	should_fail("3.5827872E2", $type, 0);

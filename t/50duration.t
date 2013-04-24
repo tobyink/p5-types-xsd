@@ -194,7 +194,7 @@ subtest "Type atomic/duration is restricted by facet maxInclusive with value P20
 };
 
 subtest "Type atomic/duration is restricted by facet pattern with value P\\d\\d76Y\\d4M2\\dDT1\\dH\\d9M\\d9S." => sub {
-	my $type = mk_type('Duration', {'pattern' => qr/(?^ums:^P\d\d76Y\d4M2\dDT1\dH\d9M\d9S$)/});
+	my $type = mk_type('Duration', {'pattern' => qr/(?ms:^P\d\d76Y\d4M2\dDT1\dH\d9M\d9S$)/});
 	should_pass("P1876Y04M23DT16H39M39S", $type, 0);
 	should_pass("P1876Y04M22DT17H19M19S", $type, 0);
 	should_pass("P1876Y04M24DT12H49M19S", $type, 0);
@@ -204,7 +204,7 @@ subtest "Type atomic/duration is restricted by facet pattern with value P\\d\\d7
 };
 
 subtest "Type atomic/duration is restricted by facet pattern with value P\\d\\d74Y0\\dM\\d6DT1\\dH\\d0M\\d7S." => sub {
-	my $type = mk_type('Duration', {'pattern' => qr/(?^ums:^P\d\d74Y0\dM\d6DT1\dH\d0M\d7S$)/});
+	my $type = mk_type('Duration', {'pattern' => qr/(?ms:^P\d\d74Y0\dM\d6DT1\dH\d0M\d7S$)/});
 	should_pass("P1974Y05M26DT18H00M27S", $type, 0);
 	should_pass("P2074Y09M06DT18H20M17S", $type, 0);
 	should_pass("P1974Y03M26DT14H10M17S", $type, 0);
@@ -214,7 +214,7 @@ subtest "Type atomic/duration is restricted by facet pattern with value P\\d\\d7
 };
 
 subtest "Type atomic/duration is restricted by facet pattern with value P20\\d\\dY\\d3M\\d1DT\\d4H\\d7M\\d6S." => sub {
-	my $type = mk_type('Duration', {'pattern' => qr/(?^ums:^P20\d\dY\d3M\d1DT\d4H\d7M\d6S$)/});
+	my $type = mk_type('Duration', {'pattern' => qr/(?ms:^P20\d\dY\d3M\d1DT\d4H\d7M\d6S$)/});
 	should_pass("P2043Y03M11DT04H17M16S", $type, 0);
 	should_pass("P2017Y03M21DT04H37M36S", $type, 0);
 	should_pass("P2034Y03M01DT14H57M06S", $type, 0);
@@ -224,7 +224,7 @@ subtest "Type atomic/duration is restricted by facet pattern with value P20\\d\\
 };
 
 subtest "Type atomic/duration is restricted by facet pattern with value P19\\d\\dY\\d8M\\d3DT\\d0H1\\dM\\d2S." => sub {
-	my $type = mk_type('Duration', {'pattern' => qr/(?^ums:^P19\d\dY\d8M\d3DT\d0H1\dM\d2S$)/});
+	my $type = mk_type('Duration', {'pattern' => qr/(?ms:^P19\d\dY\d8M\d3DT\d0H1\dM\d2S$)/});
 	should_pass("P1941Y08M13DT00H15M02S", $type, 0);
 	should_pass("P1912Y08M23DT10H14M32S", $type, 0);
 	should_pass("P1944Y08M13DT00H14M32S", $type, 0);
@@ -234,7 +234,7 @@ subtest "Type atomic/duration is restricted by facet pattern with value P19\\d\\
 };
 
 subtest "Type atomic/duration is restricted by facet pattern with value P\\d\\d63Y\\d4M1\\dDT0\\dH\\d4M4\\dS." => sub {
-	my $type = mk_type('Duration', {'pattern' => qr/(?^ums:^P\d\d63Y\d4M1\dDT0\dH\d4M4\dS$)/});
+	my $type = mk_type('Duration', {'pattern' => qr/(?ms:^P\d\d63Y\d4M1\dDT0\dH\d4M4\dS$)/});
 	should_pass("P1863Y04M14DT04H14M46S", $type, 0);
 	should_pass("P1863Y04M15DT06H44M47S", $type, 0);
 	should_pass("P2063Y04M17DT07H34M43S", $type, 0);
@@ -496,7 +496,7 @@ subtest "Type atomic/duration is restricted by facet maxExclusive with value P20
 };
 
 subtest "Type atomic/duration is restricted by facet pattern with value P\\d\\d69Y\\d2M1\\dDT\\d0H\\d9M5\\dS." => sub {
-	my $type = mk_type('Duration', {'pattern' => qr/(?^ums:^P\d\d69Y\d2M1\dDT\d0H\d9M5\dS$)/});
+	my $type = mk_type('Duration', {'pattern' => qr/(?ms:^P\d\d69Y\d2M1\dDT\d0H\d9M5\dS$)/});
 	should_fail("P1986Y06M24DT05H04M09S", $type, 0);
 	should_fail("P1808Y03M05DT19H21M14S", $type, 0);
 	should_fail("P2038Y06M26DT05H46M26S", $type, 0);
@@ -506,7 +506,7 @@ subtest "Type atomic/duration is restricted by facet pattern with value P\\d\\d6
 };
 
 subtest "Type atomic/duration is restricted by facet pattern with value P19\\d\\dY0\\dM2\\dDT\\d1H\\d9M\\d9S." => sub {
-	my $type = mk_type('Duration', {'pattern' => qr/(?^ums:^P19\d\dY0\dM2\dDT\d1H\d9M\d9S$)/});
+	my $type = mk_type('Duration', {'pattern' => qr/(?ms:^P19\d\dY0\dM2\dDT\d1H\d9M\d9S$)/});
 	should_fail("P1813Y12M05DT03H21M34S", $type, 0);
 	should_fail("P2007Y12M12DT06H56M25S", $type, 0);
 	should_fail("P2092Y11M14DT19H47M40S", $type, 0);
@@ -516,7 +516,7 @@ subtest "Type atomic/duration is restricted by facet pattern with value P19\\d\\
 };
 
 subtest "Type atomic/duration is restricted by facet pattern with value P\\d\\d24Y0\\dM1\\dDT1\\dH\\d0M5\\dS." => sub {
-	my $type = mk_type('Duration', {'pattern' => qr/(?^ums:^P\d\d24Y0\dM1\dDT1\dH\d0M5\dS$)/});
+	my $type = mk_type('Duration', {'pattern' => qr/(?ms:^P\d\d24Y0\dM1\dDT1\dH\d0M5\dS$)/});
 	should_fail("P2080Y11M20DT28H23M07S", $type, 0);
 	should_fail("P1963Y10M27DT05H33M27S", $type, 0);
 	should_fail("P1860Y11M01DT29H07M09S", $type, 0);
@@ -526,7 +526,7 @@ subtest "Type atomic/duration is restricted by facet pattern with value P\\d\\d2
 };
 
 subtest "Type atomic/duration is restricted by facet pattern with value P\\d\\d80Y\\d8M1\\dDT1\\dH3\\dM2\\dS." => sub {
-	my $type = mk_type('Duration', {'pattern' => qr/(?^ums:^P\d\d80Y\d8M1\dDT1\dH3\dM2\dS$)/});
+	my $type = mk_type('Duration', {'pattern' => qr/(?ms:^P\d\d80Y\d8M1\dDT1\dH3\dM2\dS$)/});
 	should_fail("P2035Y04M26DT42H16M44S", $type, 0);
 	should_fail("P1953Y03M25DT56H22M31S", $type, 0);
 	should_fail("P1882Y02M01DT43H46M14S", $type, 0);
@@ -536,7 +536,7 @@ subtest "Type atomic/duration is restricted by facet pattern with value P\\d\\d8
 };
 
 subtest "Type atomic/duration is restricted by facet pattern with value P17\\d\\dY\\d7M\\d3DT0\\dH0\\dM\\d5S." => sub {
-	my $type = mk_type('Duration', {'pattern' => qr/(?^ums:^P17\d\dY\d7M\d3DT0\dH0\dM\d5S$)/});
+	my $type = mk_type('Duration', {'pattern' => qr/(?ms:^P17\d\dY\d7M\d3DT0\dH0\dM\d5S$)/});
 	should_fail("P1865Y03M10DT42H54M38S", $type, 0);
 	should_fail("P2018Y05M22DT17H44M47S", $type, 0);
 	should_fail("P1905Y01M08DT26H15M16S", $type, 0);

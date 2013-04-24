@@ -160,7 +160,7 @@ subtest "Type atomic/string is restricted by facet length with value 1000." => s
 };
 
 subtest "Type atomic/string is restricted by facet pattern with value \\d{1,5}\\s([A-Z][a-z]{1,20}\\s){4}Street\\n([A-Z][a-z]{1,20}\\s){2},\\s[A-Z]{2}\\s12848." => sub {
-	my $type = mk_type('String', {'pattern' => qr/(?^ums:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\n([A-Z][a-z]{1,20}\s){2},\s[A-Z]{2}\s12848$)/});
+	my $type = mk_type('String', {'pattern' => qr/(?ms:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\n([A-Z][a-z]{1,20}\s){2},\s[A-Z]{2}\s12848$)/});
 	should_pass("27951 Frameworks Library Them Objects Street\nRegard As , DC 12848", $type, 0);
 	should_pass("7 Of Typical To Original Street\nIn Prominent , AK 12848", $type, 0);
 	should_pass("5367 Bandwidth To Oasis Based Street\nCommunication Popular , NM 12848", $type, 0);
@@ -170,7 +170,7 @@ subtest "Type atomic/string is restricted by facet pattern with value \\d{1,5}\\
 };
 
 subtest "Type atomic/string is restricted by facet pattern with value \\d{1,5}\\s([A-Z][a-z]{1,20}\\s){2}Street\\n([A-Z][a-z]{1,20}\\s){3},\\s[A-Z]{2}\\s15849." => sub {
-	my $type = mk_type('String', {'pattern' => qr/(?^ums:^\d{1,5}\s([A-Z][a-z]{1,20}\s){2}Street\n([A-Z][a-z]{1,20}\s){3},\s[A-Z]{2}\s15849$)/});
+	my $type = mk_type('String', {'pattern' => qr/(?ms:^\d{1,5}\s([A-Z][a-z]{1,20}\s){2}Street\n([A-Z][a-z]{1,20}\s){3},\s[A-Z]{2}\s15849$)/});
 	should_pass("726 Of In Street\nUser Those Of , IL 15849", $type, 0);
 	should_pass("598 In This Street\nDespite Partnerships Generation , TN 15849", $type, 0);
 	should_pass("53544 Compatibility Already Street\nTesting Business For , NY 15849", $type, 0);
@@ -180,7 +180,7 @@ subtest "Type atomic/string is restricted by facet pattern with value \\d{1,5}\\
 };
 
 subtest "Type atomic/string is restricted by facet pattern with value \\d{1,5}\\s([A-Z][a-z]{1,20}\\s){4}Street\\n([A-Z][a-z]{1,20}\\s){1},\\s[A-Z]{2}\\s13420-1016." => sub {
-	my $type = mk_type('String', {'pattern' => qr/(?^ums:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\n([A-Z][a-z]{1,20}\s){1},\s[A-Z]{2}\s13420-1016$)/});
+	my $type = mk_type('String', {'pattern' => qr/(?ms:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\n([A-Z][a-z]{1,20}\s){1},\s[A-Z]{2}\s13420-1016$)/});
 	should_pass("367 Less Of Of Testing Street\nWidespread , MN 13420-1016", $type, 0);
 	should_pass("138 Provides Available Related Efforts Street\nAct , IN 13420-1016", $type, 0);
 	should_pass("967 Systems Allows Technology Health Street\nCommunity , IL 13420-1016", $type, 0);
@@ -190,7 +190,7 @@ subtest "Type atomic/string is restricted by facet pattern with value \\d{1,5}\\
 };
 
 subtest "Type atomic/string is restricted by facet pattern with value \\d{1,5}\\s([A-Z][a-z]{1,20}\\s){4}Street\\n([A-Z][a-z]{1,20}\\s){2},\\s[A-Z]{2}\\s17687." => sub {
-	my $type = mk_type('String', {'pattern' => qr/(?^ums:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\n([A-Z][a-z]{1,20}\s){2},\s[A-Z]{2}\s17687$)/});
+	my $type = mk_type('String', {'pattern' => qr/(?ms:^\d{1,5}\s([A-Z][a-z]{1,20}\s){4}Street\n([A-Z][a-z]{1,20}\s){2},\s[A-Z]{2}\s17687$)/});
 	should_pass("45 Paradigm User Management Dependability Street\nThe Industry , SD 17687", $type, 0);
 	should_pass("96 Mediums Benefits Technologies Reference Street\nMicrosystems Files , UT 17687", $type, 0);
 	should_pass("1138 Computing Systems Other Architectural Street\nIts Key , AZ 17687", $type, 0);
@@ -200,7 +200,7 @@ subtest "Type atomic/string is restricted by facet pattern with value \\d{1,5}\\
 };
 
 subtest "Type atomic/string is restricted by facet pattern with value \\d{1,5}\\s([A-Z][a-z]{1,20}\\s){3}Street\\n([A-Z][a-z]{1,20}\\s){1},\\s[A-Z]{2}\\s11101." => sub {
-	my $type = mk_type('String', {'pattern' => qr/(?^ums:^\d{1,5}\s([A-Z][a-z]{1,20}\s){3}Street\n([A-Z][a-z]{1,20}\s){1},\s[A-Z]{2}\s11101$)/});
+	my $type = mk_type('String', {'pattern' => qr/(?ms:^\d{1,5}\s([A-Z][a-z]{1,20}\s){3}Street\n([A-Z][a-z]{1,20}\s){1},\s[A-Z]{2}\s11101$)/});
 	should_pass("37 To Filter The Street\nAnd , GA 11101", $type, 0);
 	should_pass("3358 Techniques Interoperability Exchange Street\nAs , AL 11101", $type, 0);
 	should_pass("327 Criteria Information The Street\nTools , FL 11101", $type, 0);

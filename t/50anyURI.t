@@ -160,7 +160,7 @@ subtest "Type atomic/anyURI is restricted by facet length with value 63." => sub
 };
 
 subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}://(\\c{1,7}\\.){1,2}\\c{3}." => sub {
-	my $type = mk_type('AnyURI', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,7}\.){1,2}(?:$XML::RegExp::NameChar){3}$)/});
+	my $type = mk_type('AnyURI', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,7}\.){1,2}(?:$XML::RegExp::NameChar){3}$)/});
 	should_pass("gopher://Sty.reques.org", $type, 0);
 	should_pass("telnet://wirel.oldert.org", $type, 0);
 	should_pass("telnet://beth.edu", $type, 0);
@@ -170,7 +170,7 @@ subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}:/
 };
 
 subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}://(\\c{1,3}\\.){1,4}\\c{3}." => sub {
-	my $type = mk_type('AnyURI', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,3}\.){1,4}(?:$XML::RegExp::NameChar){3}$)/});
+	my $type = mk_type('AnyURI', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,3}\.){1,4}(?:$XML::RegExp::NameChar){3}$)/});
 	should_pass("telnet://mo.X.th.com", $type, 0);
 	should_pass("news://thu.o.pro.wid.com", $type, 0);
 	should_pass("ftp://b.Co.and.net", $type, 0);
@@ -180,7 +180,7 @@ subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}:/
 };
 
 subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}://(\\c{1,7}\\.){1,4}\\c{3}." => sub {
-	my $type = mk_type('AnyURI', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,7}\.){1,4}(?:$XML::RegExp::NameChar){3}$)/});
+	my $type = mk_type('AnyURI', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,7}\.){1,4}(?:$XML::RegExp::NameChar){3}$)/});
 	should_pass("ftp://XSLthat.incons.isdispl.softwa.org", $type, 0);
 	should_pass("ftp://too.edu", $type, 0);
 	should_pass("ftp://indust.Aso.dra.gov", $type, 0);
@@ -190,7 +190,7 @@ subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}:/
 };
 
 subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}://(\\c{1,6}\\.){1,2}\\c{3}." => sub {
-	my $type = mk_type('AnyURI', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,6}\.){1,2}(?:$XML::RegExp::NameChar){3}$)/});
+	my $type = mk_type('AnyURI', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,6}\.){1,2}(?:$XML::RegExp::NameChar){3}$)/});
 	should_pass("ftp://techn.using.gov", $type, 0);
 	should_pass("ftp://the.com", $type, 0);
 	should_pass("telnet://these.s.org", $type, 0);
@@ -200,7 +200,7 @@ subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}:/
 };
 
 subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}://(\\c{1,10}\\.){1,5}\\c{3}." => sub {
-	my $type = mk_type('AnyURI', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,10}\.){1,5}(?:$XML::RegExp::NameChar){3}$)/});
+	my $type = mk_type('AnyURI', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,10}\.){1,5}(?:$XML::RegExp::NameChar){3}$)/});
 	should_pass("telnet://and.the.thattesti.andspeci.im.gov", $type, 0);
 	should_pass("ftp://beingamon.I.net", $type, 0);
 	should_pass("gopher://whoservi.theXSL.fact.ma.net", $type, 0);
@@ -420,7 +420,7 @@ subtest "Type atomic/anyURI is restricted by facet length with value 63." => sub
 };
 
 subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}://(\\c{1,2}\\.){1,5}\\c{3}." => sub {
-	my $type = mk_type('AnyURI', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,2}\.){1,5}(?:$XML::RegExp::NameChar){3}$)/});
+	my $type = mk_type('AnyURI', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,2}\.){1,5}(?:$XML::RegExp::NameChar){3}$)/});
 	should_fail("ftp://eachbewit.otherwilleXtens.follow.lawbeaande.XMLus.repositor.com", $type, 0);
 	should_fail("http://build.theamongimag.becom.OASIScompu.thedue.XMLbusinessis.organizations.gov", $type, 0);
 	should_fail("http://regist.stimu.waysmanyth.andprofil.exchang.knownagraphi.ECprovidedCom.otherSchemape.edu", $type, 0);
@@ -430,7 +430,7 @@ subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}:/
 };
 
 subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}://(\\c{1,3}\\.){1,4}\\c{3}." => sub {
-	my $type = mk_type('AnyURI', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,3}\.){1,4}(?:$XML::RegExp::NameChar){3}$)/});
+	my $type = mk_type('AnyURI', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,3}\.){1,4}(?:$XML::RegExp::NameChar){3}$)/});
 	should_fail("ftp://toregist.thesecanther.NISTme.thefor.amongthosesuch.andtonetw.org", $type, 0);
 	should_fail("gopher://aInternetthela.Virtuallyso.software.communi.widelyTo.usedtheover.andeachS.com", $type, 0);
 	should_fail("ftp://andbothreposit.regis.revolutioniz.oncreatedt.resourcesI.usingandmakeNI.org", $type, 0);
@@ -440,7 +440,7 @@ subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}:/
 };
 
 subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}://(\\c{1,5}\\.){1,4}\\c{3}." => sub {
-	my $type = mk_type('AnyURI', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,5}\.){1,4}(?:$XML::RegExp::NameChar){3}$)/});
+	my $type = mk_type('AnyURI', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,5}\.){1,4}(?:$XML::RegExp::NameChar){3}$)/});
 	should_fail("news://olderperfo.totempla.forlanguageth.thesethecreate.towidetotheb.abilitySchema.useofyears.edu", $type, 0);
 	should_fail("telnet://filewithinD.thecomputera.byresidesitp.nointhemsi.arecreates.withtodocuments.accomplishsec.gov", $type, 0);
 	should_fail("ftp://Businessdepe.thebenefitswo.SOCgovernment.referencech.deployedTh.aroledistrib.andXMLarepub.com", $type, 0);
@@ -450,7 +450,7 @@ subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}:/
 };
 
 subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}://(\\c{1,10}\\.){1,3}\\c{3}." => sub {
-	my $type = mk_type('AnyURI', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,10}\.){1,3}(?:$XML::RegExp::NameChar){3}$)/});
+	my $type = mk_type('AnyURI', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,10}\.){1,3}(?:$XML::RegExp::NameChar){3}$)/});
 	should_fail("telnet://aboutdevelopm.referenceofreg.mustthebuildLan.ofamongAtois.andtheandmust.certainOASI.theInternetaan.thethetheseus.com", $type, 0);
 	should_fail("gopher://CPUtographics.ebXMLArchitec.furthertheofa.thecomplexadd.fourcorrection.ofrelatedvo.com", $type, 0);
 	should_fail("ftp://scomputingth.certaintheof.issueselectroni.thetechnologie.partnersofthis.gov", $type, 0);
@@ -460,7 +460,7 @@ subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}:/
 };
 
 subtest "Type atomic/anyURI is restricted by facet pattern with value \\c{3,6}://(\\c{1,7}\\.){1,3}\\c{3}." => sub {
-	my $type = mk_type('AnyURI', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,7}\.){1,3}(?:$XML::RegExp::NameChar){3}$)/});
+	my $type = mk_type('AnyURI', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar){3,6}:\/\/((?:$XML::RegExp::NameChar){1,7}\.){1,3}(?:$XML::RegExp::NameChar){3}$)/});
 	should_fail("gopher://mustNISTproc.aselectronican.systemsstan.andwireles.Informationa.definecanfo.completi.wouldofanat.gov", $type, 0);
 	should_fail("telnet://aparadigmsta.XMLstake.dataaregr.repositori.signaturesNat.andprocessdocum.gov", $type, 0);
 	should_fail("news://understandthe.including.whichamong.partnerships.andsupplytest.contribut.forofhel.net", $type, 0);

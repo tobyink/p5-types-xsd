@@ -160,7 +160,7 @@ subtest "Type atomic/hexBinary is restricted by facet length with value 74." => 
 };
 
 subtest "Type atomic/hexBinary is restricted by facet pattern with value [0-9A-F]{56}." => sub {
-	my $type = mk_type('HexBinary', {'pattern' => qr/(?^ums:^[0-9A-F]{56}$)/});
+	my $type = mk_type('HexBinary', {'pattern' => qr/(?ms:^[0-9A-F]{56}$)/});
 	should_pass("756765786D706E686D61746C736A66696F6870727272707864666579", $type, 0);
 	should_pass("6164696771616D657769787078716767647573626D65686570687579", $type, 0);
 	should_pass("6C6C716F636879677467686871776571686161616E6D78636B686563", $type, 0);
@@ -170,7 +170,7 @@ subtest "Type atomic/hexBinary is restricted by facet pattern with value [0-9A-F
 };
 
 subtest "Type atomic/hexBinary is restricted by facet pattern with value [0-9A-F]{66}." => sub {
-	my $type = mk_type('HexBinary', {'pattern' => qr/(?^ums:^[0-9A-F]{66}$)/});
+	my $type = mk_type('HexBinary', {'pattern' => qr/(?ms:^[0-9A-F]{66}$)/});
 	should_pass("6564757662646E6B76686F77747473656B7876726F7062616A6B70677272736867", $type, 0);
 	should_pass("6E6776726D7468796B766A766B6872796C6A7063666C68616F616B6272766D6B6A", $type, 0);
 	should_pass("686463686A7665776B746F756A616673626E6C69796278747176677861756A6378", $type, 0);
@@ -180,7 +180,7 @@ subtest "Type atomic/hexBinary is restricted by facet pattern with value [0-9A-F
 };
 
 subtest "Type atomic/hexBinary is restricted by facet pattern with value [0-9A-F]{18}." => sub {
-	my $type = mk_type('HexBinary', {'pattern' => qr/(?^ums:^[0-9A-F]{18}$)/});
+	my $type = mk_type('HexBinary', {'pattern' => qr/(?ms:^[0-9A-F]{18}$)/});
 	should_pass("686163626B6E726F61", $type, 0);
 	should_pass("66666F7062616A7269", $type, 0);
 	should_pass("6C706B737361767170", $type, 0);
@@ -190,7 +190,7 @@ subtest "Type atomic/hexBinary is restricted by facet pattern with value [0-9A-F
 };
 
 subtest "Type atomic/hexBinary is restricted by facet pattern with value [0-9A-F]{46}." => sub {
-	my $type = mk_type('HexBinary', {'pattern' => qr/(?^ums:^[0-9A-F]{46}$)/});
+	my $type = mk_type('HexBinary', {'pattern' => qr/(?ms:^[0-9A-F]{46}$)/});
 	should_pass("616B6374737472717274636768616E66746C77726F6771", $type, 0);
 	should_pass("71686674766B73656B6E6772617378686D77746E696D66", $type, 0);
 	should_pass("626467696F686C71616B6D7872766B666E796D6D6D6779", $type, 0);
@@ -200,7 +200,7 @@ subtest "Type atomic/hexBinary is restricted by facet pattern with value [0-9A-F
 };
 
 subtest "Type atomic/hexBinary is restricted by facet pattern with value [0-9A-F]{60}." => sub {
-	my $type = mk_type('HexBinary', {'pattern' => qr/(?^ums:^[0-9A-F]{60}$)/});
+	my $type = mk_type('HexBinary', {'pattern' => qr/(?ms:^[0-9A-F]{60}$)/});
 	should_pass("746A71716F6E6F796E7463657773706177746A746173616274706671616A", $type, 0);
 	should_pass("6A6F6F67676273756B726A696D6F6E61726E796969767061756262726279", $type, 0);
 	should_pass("69706467776169706D7871727879636E6D69626271797962776B67686D61", $type, 0);

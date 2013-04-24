@@ -234,7 +234,7 @@ subtest "Type atomic/unsignedByte is restricted by facet totalDigits with value 
 };
 
 subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{1}." => sub {
-	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?^ums:^\d{1}$)/});
+	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?ms:^\d{1}$)/});
 	should_pass("6", $type, 0);
 	should_pass("5", $type, 0);
 	should_pass("6", $type, 0);
@@ -244,7 +244,7 @@ subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{
 };
 
 subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{2}." => sub {
-	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?^ums:^\d{2}$)/});
+	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?ms:^\d{2}$)/});
 	should_pass("43", $type, 0);
 	should_pass("67", $type, 0);
 	should_pass("48", $type, 0);
@@ -254,7 +254,7 @@ subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{
 };
 
 subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{3}." => sub {
-	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?^ums:^\d{3}$)/});
+	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?ms:^\d{3}$)/});
 	should_pass("242", $type, 0);
 	should_pass("222", $type, 0);
 	should_pass("234", $type, 0);
@@ -264,7 +264,7 @@ subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{
 };
 
 subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{1}." => sub {
-	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?^ums:^\d{1}$)/});
+	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?ms:^\d{1}$)/});
 	should_pass("8", $type, 0);
 	should_pass("4", $type, 0);
 	should_pass("3", $type, 0);
@@ -274,7 +274,7 @@ subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{
 };
 
 subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{2}." => sub {
-	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?^ums:^\d{2}$)/});
+	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?ms:^\d{2}$)/});
 	should_pass("52", $type, 0);
 	should_pass("83", $type, 0);
 	should_pass("45", $type, 0);
@@ -556,7 +556,7 @@ subtest "Type atomic/unsignedByte is restricted by facet maxExclusive with value
 };
 
 subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{1}." => sub {
-	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?^ums:^\d{1}$)/});
+	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?ms:^\d{1}$)/});
 	should_fail("27", $type, 0);
 	should_fail("221", $type, 0);
 	should_fail("31", $type, 0);
@@ -566,7 +566,7 @@ subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{
 };
 
 subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{2}." => sub {
-	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?^ums:^\d{2}$)/});
+	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?ms:^\d{2}$)/});
 	should_fail("7", $type, 0);
 	should_fail("8", $type, 0);
 	should_fail("232", $type, 0);
@@ -576,7 +576,7 @@ subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{
 };
 
 subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{3}." => sub {
-	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?^ums:^\d{3}$)/});
+	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?ms:^\d{3}$)/});
 	should_fail("85", $type, 0);
 	should_fail("85", $type, 0);
 	should_fail("46", $type, 0);
@@ -586,7 +586,7 @@ subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{
 };
 
 subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{1}." => sub {
-	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?^ums:^\d{1}$)/});
+	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?ms:^\d{1}$)/});
 	should_fail("75", $type, 0);
 	should_fail("232", $type, 0);
 	should_fail("223", $type, 0);
@@ -596,7 +596,7 @@ subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{
 };
 
 subtest "Type atomic/unsignedByte is restricted by facet pattern with value \\d{2}." => sub {
-	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?^ums:^\d{2}$)/});
+	my $type = mk_type('UnsignedByte', {'pattern' => qr/(?ms:^\d{2}$)/});
 	should_fail("1", $type, 0);
 	should_fail("234", $type, 0);
 	should_fail("4", $type, 0);

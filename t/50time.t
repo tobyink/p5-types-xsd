@@ -194,7 +194,7 @@ subtest "Type atomic/time is restricted by facet maxInclusive with value 23:59:5
 };
 
 subtest "Type atomic/time is restricted by facet pattern with value \\d9:\\d2:5\\d." => sub {
-	my $type = mk_type('Time', {'pattern' => qr/(?^ums:^\d9:\d2:5\d$)/});
+	my $type = mk_type('Time', {'pattern' => qr/(?ms:^\d9:\d2:5\d$)/});
 	should_pass("09:12:57", $type, 0);
 	should_pass("19:12:57", $type, 0);
 	should_pass("09:12:56", $type, 0);
@@ -204,7 +204,7 @@ subtest "Type atomic/time is restricted by facet pattern with value \\d9:\\d2:5\
 };
 
 subtest "Type atomic/time is restricted by facet pattern with value \\d6:\\d9:\\d9." => sub {
-	my $type = mk_type('Time', {'pattern' => qr/(?^ums:^\d6:\d9:\d9$)/});
+	my $type = mk_type('Time', {'pattern' => qr/(?ms:^\d6:\d9:\d9$)/});
 	should_pass("16:49:59", $type, 0);
 	should_pass("06:59:19", $type, 0);
 	should_pass("06:49:39", $type, 0);
@@ -214,7 +214,7 @@ subtest "Type atomic/time is restricted by facet pattern with value \\d6:\\d9:\\
 };
 
 subtest "Type atomic/time is restricted by facet pattern with value 1\\d:3\\d:\\d5." => sub {
-	my $type = mk_type('Time', {'pattern' => qr/(?^ums:^1\d:3\d:\d5$)/});
+	my $type = mk_type('Time', {'pattern' => qr/(?ms:^1\d:3\d:\d5$)/});
 	should_pass("10:33:45", $type, 0);
 	should_pass("16:36:05", $type, 0);
 	should_pass("15:35:55", $type, 0);
@@ -224,7 +224,7 @@ subtest "Type atomic/time is restricted by facet pattern with value 1\\d:3\\d:\\
 };
 
 subtest "Type atomic/time is restricted by facet pattern with value \\d8:\\d4:\\d6." => sub {
-	my $type = mk_type('Time', {'pattern' => qr/(?^ums:^\d8:\d4:\d6$)/});
+	my $type = mk_type('Time', {'pattern' => qr/(?ms:^\d8:\d4:\d6$)/});
 	should_pass("18:54:16", $type, 0);
 	should_pass("18:34:46", $type, 0);
 	should_pass("08:14:16", $type, 0);
@@ -234,7 +234,7 @@ subtest "Type atomic/time is restricted by facet pattern with value \\d8:\\d4:\\
 };
 
 subtest "Type atomic/time is restricted by facet pattern with value \\d0:3\\d:2\\d." => sub {
-	my $type = mk_type('Time', {'pattern' => qr/(?^ums:^\d0:3\d:2\d$)/});
+	my $type = mk_type('Time', {'pattern' => qr/(?ms:^\d0:3\d:2\d$)/});
 	should_pass("00:37:22", $type, 0);
 	should_pass("00:37:20", $type, 0);
 	should_pass("00:33:24", $type, 0);
@@ -496,7 +496,7 @@ subtest "Type atomic/time is restricted by facet maxExclusive with value 23:59:5
 };
 
 subtest "Type atomic/time is restricted by facet pattern with value 1\\d:2\\d:\\d4." => sub {
-	my $type = mk_type('Time', {'pattern' => qr/(?^ums:^1\d:2\d:\d4$)/});
+	my $type = mk_type('Time', {'pattern' => qr/(?ms:^1\d:2\d:\d4$)/});
 	should_fail("56:42:06", $type, 0);
 	should_fail("41:49:38", $type, 0);
 	should_fail("24:51:31", $type, 0);
@@ -506,7 +506,7 @@ subtest "Type atomic/time is restricted by facet pattern with value 1\\d:2\\d:\\
 };
 
 subtest "Type atomic/time is restricted by facet pattern with value 1\\d:0\\d:3\\d." => sub {
-	my $type = mk_type('Time', {'pattern' => qr/(?^ums:^1\d:0\d:3\d$)/});
+	my $type = mk_type('Time', {'pattern' => qr/(?ms:^1\d:0\d:3\d$)/});
 	should_fail("44:26:28", $type, 0);
 	should_fail("06:17:26", $type, 0);
 	should_fail("47:42:05", $type, 0);
@@ -516,7 +516,7 @@ subtest "Type atomic/time is restricted by facet pattern with value 1\\d:0\\d:3\
 };
 
 subtest "Type atomic/time is restricted by facet pattern with value 0\\d:1\\d:\\d1." => sub {
-	my $type = mk_type('Time', {'pattern' => qr/(?^ums:^0\d:1\d:\d1$)/});
+	my $type = mk_type('Time', {'pattern' => qr/(?ms:^0\d:1\d:\d1$)/});
 	should_fail("41:48:13", $type, 0);
 	should_fail("17:38:26", $type, 0);
 	should_fail("21:48:06", $type, 0);
@@ -526,7 +526,7 @@ subtest "Type atomic/time is restricted by facet pattern with value 0\\d:1\\d:\\
 };
 
 subtest "Type atomic/time is restricted by facet pattern with value 0\\d:4\\d:\\d9." => sub {
-	my $type = mk_type('Time', {'pattern' => qr/(?^ums:^0\d:4\d:\d9$)/});
+	my $type = mk_type('Time', {'pattern' => qr/(?ms:^0\d:4\d:\d9$)/});
 	should_fail("58:22:17", $type, 0);
 	should_fail("47:32:47", $type, 0);
 	should_fail("36:37:38", $type, 0);
@@ -536,7 +536,7 @@ subtest "Type atomic/time is restricted by facet pattern with value 0\\d:4\\d:\\
 };
 
 subtest "Type atomic/time is restricted by facet pattern with value \\d0:\\d6:\\d7." => sub {
-	my $type = mk_type('Time', {'pattern' => qr/(?^ums:^\d0:\d6:\d7$)/});
+	my $type = mk_type('Time', {'pattern' => qr/(?ms:^\d0:\d6:\d7$)/});
 	should_fail("03:01:42", $type, 0);
 	should_fail("17:30:11", $type, 0);
 	should_fail("17:39:45", $type, 0);

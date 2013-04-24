@@ -254,7 +254,7 @@ subtest "Type atomic/nonNegativeInteger is restricted by facet totalDigits with 
 };
 
 subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with value \\d{1}." => sub {
-	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?^ums:^\d{1}$)/});
+	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?ms:^\d{1}$)/});
 	should_pass("5", $type, 0);
 	should_pass("7", $type, 0);
 	should_pass("8", $type, 0);
@@ -264,7 +264,7 @@ subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with valu
 };
 
 subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with value \\d{5}." => sub {
-	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?^ums:^\d{5}$)/});
+	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?ms:^\d{5}$)/});
 	should_pass("61563", $type, 0);
 	should_pass("71174", $type, 0);
 	should_pass("88533", $type, 0);
@@ -274,7 +274,7 @@ subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with valu
 };
 
 subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with value \\d{9}." => sub {
-	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?^ums:^\d{9}$)/});
+	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?ms:^\d{9}$)/});
 	should_pass("744672379", $type, 0);
 	should_pass("352843363", $type, 0);
 	should_pass("546285228", $type, 0);
@@ -284,7 +284,7 @@ subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with valu
 };
 
 subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with value \\d{13}." => sub {
-	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?^ums:^\d{13}$)/});
+	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?ms:^\d{13}$)/});
 	should_pass("3515776629323", $type, 0);
 	should_pass("7439739327795", $type, 0);
 	should_pass("5383645611171", $type, 0);
@@ -294,7 +294,7 @@ subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with valu
 };
 
 subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with value \\d{18}." => sub {
-	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?^ums:^\d{18}$)/});
+	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?ms:^\d{18}$)/});
 	should_pass("915476347284546727", $type, 0);
 	should_pass("981361845647637366", $type, 0);
 	should_pass("921446647764661256", $type, 0);
@@ -606,7 +606,7 @@ subtest "Type atomic/nonNegativeInteger is restricted by facet maxExclusive with
 };
 
 subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with value \\d{1}." => sub {
-	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?^ums:^\d{1}$)/});
+	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?ms:^\d{1}$)/});
 	should_fail("4335235", $type, 0);
 	should_fail("77", $type, 0);
 	should_fail("227847", $type, 0);
@@ -616,7 +616,7 @@ subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with valu
 };
 
 subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with value \\d{5}." => sub {
-	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?^ums:^\d{5}$)/});
+	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?ms:^\d{5}$)/});
 	should_fail("39855645", $type, 0);
 	should_fail("73", $type, 0);
 	should_fail("34889484", $type, 0);
@@ -626,7 +626,7 @@ subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with valu
 };
 
 subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with value \\d{9}." => sub {
-	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?^ums:^\d{9}$)/});
+	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?ms:^\d{9}$)/});
 	should_fail("35184452224", $type, 0);
 	should_fail("17", $type, 0);
 	should_fail("85977", $type, 0);
@@ -636,7 +636,7 @@ subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with valu
 };
 
 subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with value \\d{13}." => sub {
-	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?^ums:^\d{13}$)/});
+	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?ms:^\d{13}$)/});
 	should_fail("3365452747", $type, 0);
 	should_fail("7", $type, 0);
 	should_fail("845326", $type, 0);
@@ -646,7 +646,7 @@ subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with valu
 };
 
 subtest "Type atomic/nonNegativeInteger is restricted by facet pattern with value \\d{18}." => sub {
-	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?^ums:^\d{18}$)/});
+	my $type = mk_type('NonNegativeInteger', {'pattern' => qr/(?ms:^\d{18}$)/});
 	should_fail("6462125255", $type, 0);
 	should_fail("364364648671", $type, 0);
 	should_fail("5268764", $type, 0);

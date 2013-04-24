@@ -160,7 +160,7 @@ subtest "Type atomic/Name is restricted by facet length with value 64." => sub {
 };
 
 subtest "Type atomic/Name is restricted by facet pattern with value \\i\\c{45}." => sub {
-	my $type = mk_type('Name', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar)(?:$XML::RegExp::NameChar){45}$)/});
+	my $type = mk_type('Name', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar)(?:$XML::RegExp::NameChar){45}$)/});
 	should_pass("finteroperability-these_files-print:a_into_or:", $type, 0);
 	should_pass("icomputing_will:includes:capabilities:need:to:", $type, 0);
 	should_pass("yrecognition.will:security_automating_library_", $type, 0);
@@ -170,7 +170,7 @@ subtest "Type atomic/Name is restricted by facet pattern with value \\i\\c{45}."
 };
 
 subtest "Type atomic/Name is restricted by facet pattern with value \\i\\c{52}." => sub {
-	my $type = mk_type('Name', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar)(?:$XML::RegExp::NameChar){52}$)/});
+	my $type = mk_type('Name', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar)(?:$XML::RegExp::NameChar){52}$)/});
 	should_pass("ldesktop_object.needs_some:in:collaborating.of-be:app", $type, 0);
 	should_pass("rsignatures:the_are:degree_over_is:tests_technologies", $type, 0);
 	should_pass("uthe:profile-documents-of-we:and_recent_the_own-using", $type, 0);
@@ -180,7 +180,7 @@ subtest "Type atomic/Name is restricted by facet pattern with value \\i\\c{52}."
 };
 
 subtest "Type atomic/Name is restricted by facet pattern with value \\i\\c{32}." => sub {
-	my $type = mk_type('Name', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar)(?:$XML::RegExp::NameChar){32}$)/});
+	my $type = mk_type('Name', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar)(?:$XML::RegExp::NameChar){32}$)/});
 	should_pass(":a-a.and_s-for-used_means-high_we", $type, 0);
 	should_pass("_the.the-a:raised-to-review-to-hi", $type, 0);
 	should_pass("gleadership_interacting_test.avai", $type, 0);
@@ -190,7 +190,7 @@ subtest "Type atomic/Name is restricted by facet pattern with value \\i\\c{32}."
 };
 
 subtest "Type atomic/Name is restricted by facet pattern with value \\i\\c{14}." => sub {
-	my $type = mk_type('Name', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar)(?:$XML::RegExp::NameChar){14}$)/});
+	my $type = mk_type('Name', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar)(?:$XML::RegExp::NameChar){14}$)/});
 	should_pass("fof-for-pervasi", $type, 0);
 	should_pass(":necessary_auto", $type, 0);
 	should_pass("tdata_also_seri", $type, 0);
@@ -200,7 +200,7 @@ subtest "Type atomic/Name is restricted by facet pattern with value \\i\\c{14}."
 };
 
 subtest "Type atomic/Name is restricted by facet pattern with value \\i\\c{31}." => sub {
-	my $type = mk_type('Name', {'pattern' => qr/(?^ums:^(?:$XML::RegExp::NameChar)(?:$XML::RegExp::NameChar){31}$)/});
+	my $type = mk_type('Name', {'pattern' => qr/(?ms:^(?:$XML::RegExp::NameChar)(?:$XML::RegExp::NameChar){31}$)/});
 	should_pass("lscreen-contribute:2001.reposito", $type, 0);
 	should_pass("mmore-s:software:and:each_a:to-f", $type, 0);
 	should_pass("dcan_graphical-for.the.daily.all", $type, 0);

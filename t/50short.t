@@ -254,7 +254,7 @@ subtest "Type atomic/short is restricted by facet totalDigits with value 5." => 
 };
 
 subtest "Type atomic/short is restricted by facet pattern with value \\-\\d{5}." => sub {
-	my $type = mk_type('Short', {'pattern' => qr/(?^ums:^\-\d{5}$)/});
+	my $type = mk_type('Short', {'pattern' => qr/(?ms:^\-\d{5}$)/});
 	should_pass("-31224", $type, 0);
 	should_pass("-31431", $type, 0);
 	should_pass("-31512", $type, 0);
@@ -264,7 +264,7 @@ subtest "Type atomic/short is restricted by facet pattern with value \\-\\d{5}."
 };
 
 subtest "Type atomic/short is restricted by facet pattern with value \\-\\d{3}." => sub {
-	my $type = mk_type('Short', {'pattern' => qr/(?^ums:^\-\d{3}$)/});
+	my $type = mk_type('Short', {'pattern' => qr/(?ms:^\-\d{3}$)/});
 	should_pass("-572", $type, 0);
 	should_pass("-678", $type, 0);
 	should_pass("-295", $type, 0);
@@ -274,7 +274,7 @@ subtest "Type atomic/short is restricted by facet pattern with value \\-\\d{3}."
 };
 
 subtest "Type atomic/short is restricted by facet pattern with value \\-\\d{1}." => sub {
-	my $type = mk_type('Short', {'pattern' => qr/(?^ums:^\-\d{1}$)/});
+	my $type = mk_type('Short', {'pattern' => qr/(?ms:^\-\d{1}$)/});
 	should_pass("-8", $type, 0);
 	should_pass("-8", $type, 0);
 	should_pass("-8", $type, 0);
@@ -284,7 +284,7 @@ subtest "Type atomic/short is restricted by facet pattern with value \\-\\d{1}."
 };
 
 subtest "Type atomic/short is restricted by facet pattern with value \\d{2}." => sub {
-	my $type = mk_type('Short', {'pattern' => qr/(?^ums:^\d{2}$)/});
+	my $type = mk_type('Short', {'pattern' => qr/(?ms:^\d{2}$)/});
 	should_pass("86", $type, 0);
 	should_pass("67", $type, 0);
 	should_pass("56", $type, 0);
@@ -294,7 +294,7 @@ subtest "Type atomic/short is restricted by facet pattern with value \\d{2}." =>
 };
 
 subtest "Type atomic/short is restricted by facet pattern with value \\d{5}." => sub {
-	my $type = mk_type('Short', {'pattern' => qr/(?^ums:^\d{5}$)/});
+	my $type = mk_type('Short', {'pattern' => qr/(?ms:^\d{5}$)/});
 	should_pass("31456", $type, 0);
 	should_pass("31345", $type, 0);
 	should_pass("31221", $type, 0);
@@ -596,7 +596,7 @@ subtest "Type atomic/short is restricted by facet maxExclusive with value 32767.
 };
 
 subtest "Type atomic/short is restricted by facet pattern with value \\-\\d{5}." => sub {
-	my $type = mk_type('Short', {'pattern' => qr/(?^ums:^\-\d{5}$)/});
+	my $type = mk_type('Short', {'pattern' => qr/(?ms:^\-\d{5}$)/});
 	should_fail("-4", $type, 0);
 	should_fail("-52", $type, 0);
 	should_fail("637", $type, 0);
@@ -606,7 +606,7 @@ subtest "Type atomic/short is restricted by facet pattern with value \\-\\d{5}."
 };
 
 subtest "Type atomic/short is restricted by facet pattern with value \\-\\d{3}." => sub {
-	my $type = mk_type('Short', {'pattern' => qr/(?^ums:^\-\d{3}$)/});
+	my $type = mk_type('Short', {'pattern' => qr/(?ms:^\-\d{3}$)/});
 	should_fail("-94", $type, 0);
 	should_fail("99", $type, 0);
 	should_fail("-2361", $type, 0);
@@ -616,7 +616,7 @@ subtest "Type atomic/short is restricted by facet pattern with value \\-\\d{3}."
 };
 
 subtest "Type atomic/short is restricted by facet pattern with value \\-\\d{1}." => sub {
-	my $type = mk_type('Short', {'pattern' => qr/(?^ums:^\-\d{1}$)/});
+	my $type = mk_type('Short', {'pattern' => qr/(?ms:^\-\d{1}$)/});
 	should_fail("42", $type, 0);
 	should_fail("585", $type, 0);
 	should_fail("-37", $type, 0);
@@ -626,7 +626,7 @@ subtest "Type atomic/short is restricted by facet pattern with value \\-\\d{1}."
 };
 
 subtest "Type atomic/short is restricted by facet pattern with value \\d{2}." => sub {
-	my $type = mk_type('Short', {'pattern' => qr/(?^ums:^\d{2}$)/});
+	my $type = mk_type('Short', {'pattern' => qr/(?ms:^\d{2}$)/});
 	should_fail("193", $type, 0);
 	should_fail("611", $type, 0);
 	should_fail("795", $type, 0);
@@ -636,7 +636,7 @@ subtest "Type atomic/short is restricted by facet pattern with value \\d{2}." =>
 };
 
 subtest "Type atomic/short is restricted by facet pattern with value \\d{5}." => sub {
-	my $type = mk_type('Short', {'pattern' => qr/(?^ums:^\d{5}$)/});
+	my $type = mk_type('Short', {'pattern' => qr/(?ms:^\d{5}$)/});
 	should_fail("-895", $type, 0);
 	should_fail("3625", $type, 0);
 	should_fail("217", $type, 0);

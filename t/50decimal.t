@@ -294,7 +294,7 @@ subtest "Type atomic/decimal is restricted by facet totalDigits with value 18." 
 };
 
 subtest "Type atomic/decimal is restricted by facet pattern with value \\d{1}." => sub {
-	my $type = mk_type('Decimal', {'pattern' => qr/(?^ums:^\d{1}$)/});
+	my $type = mk_type('Decimal', {'pattern' => qr/(?ms:^\d{1}$)/});
 	should_pass("3", $type, 0);
 	should_pass("2", $type, 0);
 	should_pass("2", $type, 0);
@@ -304,7 +304,7 @@ subtest "Type atomic/decimal is restricted by facet pattern with value \\d{1}." 
 };
 
 subtest "Type atomic/decimal is restricted by facet pattern with value \\-\\d{2}\\.\\d{3}." => sub {
-	my $type = mk_type('Decimal', {'pattern' => qr/(?^ums:^\-\d{2}\.\d{3}$)/});
+	my $type = mk_type('Decimal', {'pattern' => qr/(?ms:^\-\d{2}\.\d{3}$)/});
 	should_pass("-24.547", $type, 0);
 	should_pass("-65.424", $type, 0);
 	should_pass("-31.228", $type, 0);
@@ -314,7 +314,7 @@ subtest "Type atomic/decimal is restricted by facet pattern with value \\-\\d{2}
 };
 
 subtest "Type atomic/decimal is restricted by facet pattern with value \\-\\d{1}\\.\\d{8}." => sub {
-	my $type = mk_type('Decimal', {'pattern' => qr/(?^ums:^\-\d{1}\.\d{8}$)/});
+	my $type = mk_type('Decimal', {'pattern' => qr/(?ms:^\-\d{1}\.\d{8}$)/});
 	should_pass("-7.48951421", $type, 0);
 	should_pass("-4.34531931", $type, 0);
 	should_pass("-7.37470534", $type, 0);
@@ -324,7 +324,7 @@ subtest "Type atomic/decimal is restricted by facet pattern with value \\-\\d{1}
 };
 
 subtest "Type atomic/decimal is restricted by facet pattern with value \\.\\d{13}." => sub {
-	my $type = mk_type('Decimal', {'pattern' => qr/(?^ums:^\.\d{13}$)/});
+	my $type = mk_type('Decimal', {'pattern' => qr/(?ms:^\.\d{13}$)/});
 	should_pass(".2684842045582", $type, 0);
 	should_pass(".1165417431543", $type, 0);
 	should_pass(".1055532252427", $type, 0);
@@ -334,7 +334,7 @@ subtest "Type atomic/decimal is restricted by facet pattern with value \\.\\d{13
 };
 
 subtest "Type atomic/decimal is restricted by facet pattern with value \\d{5}\\.\\d{13}." => sub {
-	my $type = mk_type('Decimal', {'pattern' => qr/(?^ums:^\d{5}\.\d{13}$)/});
+	my $type = mk_type('Decimal', {'pattern' => qr/(?ms:^\d{5}\.\d{13}$)/});
 	should_pass("55217.9736118850526", $type, 0);
 	should_pass("16876.8783301171042", $type, 0);
 	should_pass("11416.7935261225030", $type, 0);
@@ -696,7 +696,7 @@ subtest "Type atomic/decimal is restricted by facet maxExclusive with value 9999
 };
 
 subtest "Type atomic/decimal is restricted by facet pattern with value \\d{1}." => sub {
-	my $type = mk_type('Decimal', {'pattern' => qr/(?^ums:^\d{1}$)/});
+	my $type = mk_type('Decimal', {'pattern' => qr/(?ms:^\d{1}$)/});
 	should_fail("33485.142484370", $type, 0);
 	should_fail("22277333688275456.1", $type, 0);
 	should_fail("533.47561744", $type, 0);
@@ -706,7 +706,7 @@ subtest "Type atomic/decimal is restricted by facet pattern with value \\d{1}." 
 };
 
 subtest "Type atomic/decimal is restricted by facet pattern with value \\d{1}\\.\\d{4}." => sub {
-	my $type = mk_type('Decimal', {'pattern' => qr/(?^ums:^\d{1}\.\d{4}$)/});
+	my $type = mk_type('Decimal', {'pattern' => qr/(?ms:^\d{1}\.\d{4}$)/});
 	should_fail("-8554.601982", $type, 0);
 	should_fail("944224585854343587", $type, 0);
 	should_fail("421252945.60641372", $type, 0);
@@ -716,7 +716,7 @@ subtest "Type atomic/decimal is restricted by facet pattern with value \\d{1}\\.
 };
 
 subtest "Type atomic/decimal is restricted by facet pattern with value \\-\\d{5}\\.\\d{4}." => sub {
-	my $type = mk_type('Decimal', {'pattern' => qr/(?^ums:^\-\d{5}\.\d{4}$)/});
+	my $type = mk_type('Decimal', {'pattern' => qr/(?ms:^\-\d{5}\.\d{4}$)/});
 	should_fail("2978258.516875716", $type, 0);
 	should_fail("-3333144481863.7", $type, 0);
 	should_fail("5976326.11677485", $type, 0);
@@ -726,7 +726,7 @@ subtest "Type atomic/decimal is restricted by facet pattern with value \\-\\d{5}
 };
 
 subtest "Type atomic/decimal is restricted by facet pattern with value \\d{10}\\.\\d{3}." => sub {
-	my $type = mk_type('Decimal', {'pattern' => qr/(?^ums:^\d{10}\.\d{3}$)/});
+	my $type = mk_type('Decimal', {'pattern' => qr/(?ms:^\d{10}\.\d{3}$)/});
 	should_fail("-84225859357429657.5", $type, 0);
 	should_fail("844382745.346644", $type, 0);
 	should_fail("-85.56736916122194", $type, 0);
@@ -736,7 +736,7 @@ subtest "Type atomic/decimal is restricted by facet pattern with value \\d{10}\\
 };
 
 subtest "Type atomic/decimal is restricted by facet pattern with value \\-\\d{17}\\.\\d{1}." => sub {
-	my $type = mk_type('Decimal', {'pattern' => qr/(?^ums:^\-\d{17}\.\d{1}$)/});
+	my $type = mk_type('Decimal', {'pattern' => qr/(?ms:^\-\d{17}\.\d{1}$)/});
 	should_fail("222935976.00581813", $type, 0);
 	should_fail("4763.344745968", $type, 0);
 	should_fail("-41338645.5464910", $type, 0);
