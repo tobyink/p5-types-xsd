@@ -143,6 +143,18 @@ my %facets = (
 		delete $o->{length};
 		"!!1"
 	},
+	explicitTimezone => sub {
+		my ($o, $var) = @_;
+		return unless exists $o->{explicitTimezone};
+		my $etz = delete $o->{explicitTimezone};
+		return sprintf('%s =~ m/(?:Z|(?:[+-]\d{2}:?\d{2}))$/xism', $var)
+			if lc($etz) eq 'required';
+		return sprintf('%s !~ m/(?:Z|(?:[+-]\d{2}:?\d{2}))$/xism', $var)
+			if lc($etz) eq 'prohibited';
+		return '!!1'
+			if lc($etz) eq 'optional';
+		croak "explicitTimezone facet expected to be 'required', 'prohibited' or 'optional'"
+	},
 	maxLengthQName => sub {
 		my ($o, $var) = @_;
 		return unless exists $o->{maxLength};
@@ -388,7 +400,7 @@ sub dt_maker
 	__PACKAGE__->add_type($type);
 	
 	facet(
-		qw( pattern whiteSpace enumeration maxInclusiveDT maxExclusiveDT minInclusiveDT minExclusiveDT ),
+		qw( pattern whiteSpace enumeration maxInclusiveDT maxExclusiveDT minInclusiveDT minExclusiveDT explicitTimezone ),
 		$type,
 	);
 	
@@ -432,6 +444,7 @@ use Type::Library -base, -declare => qw(
 	NonNegativeInteger PositiveInteger UnsignedLong UnsignedInt
 	UnsignedShort UnsignedByte Duration DateTime Time Date GYearMonth
 	GYear GMonthDay GDay GMonth
+	DateTimeStamp
 );
 
 our @EXPORT_OK = qw( dt_cmp dur_cmp dt_parse dur_parse );
@@ -578,6 +591,24 @@ dt_maker(
 		:
 		([0-9]{2}(?:\.[0-9]+)?)
 		(Z | (?: [+-]\d{2}:?\d{2} ))?
+	$}xism,
+	qw( year month day hour minute second time_zone ),
+);
+
+dt_maker(
+	DateTimeStamp => qr{^
+		(-?[0-9]{4,})
+		-
+		([0-9]{2})
+		-
+		([0-9]{2})
+		T
+		([0-9]{2})
+		:
+		([0-9]{2})
+		:
+		([0-9]{2}(?:\.[0-9]+)?)
+		(Z | (?: [+-]\d{2}:?\d{2} ))
 	$}xism,
 	qw( year month day hour minute second time_zone ),
 );
