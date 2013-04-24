@@ -105,7 +105,7 @@ sub b64_length
 	(length($str) * 3 / 4) - $padding;
 }
 
-our @patterns; my $pattern_i = -1;
+our @patterns;   my $pattern_i = -1;
 my %facets = (
 	length => sub {
 		my ($o, $var) = @_;
@@ -444,7 +444,7 @@ use Type::Library -base, -declare => qw(
 	NonNegativeInteger PositiveInteger UnsignedLong UnsignedInt
 	UnsignedShort UnsignedByte Duration DateTime Time Date GYearMonth
 	GYear GMonthDay GDay GMonth
-	DateTimeStamp
+	DateTimeStamp YearMonthDuration DayTimeDuration
 );
 
 our @EXPORT_OK = qw( dt_cmp dur_cmp dt_parse dur_parse );
@@ -576,6 +576,12 @@ declare Duration, as Types::Standard::StrMatch[
 		)?
 	$}xism
 ];
+
+facet qw( pattern whiteSpace enumeration maxInclusiveDuration maxExclusiveDuration minInclusiveDuration minExclusiveDuration ),
+declare YearMonthDuration, as Duration[ pattern => qr{^[^DT]*$} ];
+
+facet qw( pattern whiteSpace enumeration maxInclusiveDuration maxExclusiveDuration minInclusiveDuration minExclusiveDuration ),
+declare DayTimeDuration, as Duration[ pattern => qr{^[^YM]*[DT].*$} ];
 
 dt_maker(
 	DateTime => qr{^
