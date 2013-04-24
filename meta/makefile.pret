@@ -9,7 +9,6 @@
 	requires          p`Type::Library 0.003_04`;
 	requires          p`XML::RegExp 0`;
 	test_requires     p`Test::More 0.88`;
-	test_requires     p`Test::DescribeMe`;
-	test_requires     p`Test::TypeTiny 0.001`;
+	test_requires     p`Test::TypeTiny 0.003_04`;
 .
 
