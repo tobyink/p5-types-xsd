@@ -11,3 +11,14 @@
 		item "Depend on a newer version of Type::Library. (We need the undocumented _mksub method!)"^^Packaging;
 	].
 
+`Types-XSD 0.000_03 cpan:TOBYINK`
+	issued  2013-04-24;
+	changeset [
+		item "Types::XSD has some documentation now!"^^Documentation;
+		item "DateTimeStamp type constraint"^^Addition;
+		item "YearMonthDuration type constraint"^^Addition;
+		item "DayTimeDuration type constraint"^^Addition;
+		item "explicitTimezone parameter"^^Addition;
+		item "assertions parameter"^^Addition;
+	].
+
