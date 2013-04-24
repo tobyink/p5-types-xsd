@@ -464,7 +464,7 @@ sub dur_parse
 		my $A = eval($cache{"$type;a"} ||= $type->inline_check('$a'));
 		my $B = eval($cache{"$type;b"} ||= $type->inline_check('$b'));
 		$A <=> $B;
-	}	
+	}
 }
 
 use Types::Standard;
