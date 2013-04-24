@@ -403,15 +403,15 @@ sub dt_maker
 	{
 		my $var = $_[1];
 		my @code;
-		push @code, "do {";
+		push @code, "do { my \$ok = 1;";
 		push @code, sprintf(
-			'my (%s) = (%s =~ $Types::XSD::dtarr[%d]);',
+			'my (%s) = (%s =~ $Types::XSD::dtarr[%d]) or --$ok;',
 			join(', ', map "\$$_", @fields),
 			$var,
 			$j,
 		);
 		push @code, sprintf(
-			'eval { "DateTime::Incomplete"->new(%s)->to_datetime(base => $Types::XSD::base_datetime) };',
+			'$ok and eval { "DateTime::Incomplete"->new(%s)->to_datetime(base => $Types::XSD::base_datetime) };',
 			join(', ', map "$_ => \$$_", @fields),
 		);
 		push @code, "}";
@@ -605,10 +605,10 @@ declare Duration, as Types::Standard::StrMatch[
 ];
 
 facet qw( pattern whiteSpace enumeration maxInclusiveDuration maxExclusiveDuration minInclusiveDuration minExclusiveDuration ),
-declare YearMonthDuration, as Duration[ pattern => qr{^[^DT]*$} ];
+declare YearMonthDuration, as Duration->parameterize(pattern => qr{^[^DT]*$});
 
 facet qw( pattern whiteSpace enumeration maxInclusiveDuration maxExclusiveDuration minInclusiveDuration minExclusiveDuration ),
-declare DayTimeDuration, as Duration[ pattern => qr{^[^YM]*[DT].*$} ];
+declare DayTimeDuration, as Duration->parameterize(pattern => qr{^[^YM]*[DT].*$});
 
 dt_maker(
 	DateTime => qr{^
