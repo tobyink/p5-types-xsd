@@ -933,9 +933,23 @@ A C<NonNegativeInteger> between 0 and 255 (inclusive).
 
 An ISO 8601 duration.
 
+=item C<< YearMonthDuration >>
+
+An ISO 8601 duration restricted to cover only years and months.
+
+=item C<< DayTimeDuration >>
+
+An ISO 8601 duration restricted to cover only days, hours, minutes and
+seconds. (Note that this still permits durations of many years, as the
+days component is an arbitrary non-negative integer.)
+
 =item C<< DateTime >>
 
 An ISO 8601 datetime with optional timezone.
+
+=item C<< DateTimeStamp >>
+
+An ISO 8601 datetime with required timezone.
 
 =item C<< Time >>
 
@@ -1033,6 +1047,18 @@ L<http://rt.cpan.org/Dist/Display.html?Queue=Types-XSD>.
 =head1 SEE ALSO
 
 L<Type::Tiny>, L<Types::Standard>.
+
+=over
+
+=item *
+
+L<http://www.w3.org/TR/xmlschema-2/> Datatypes in XML Schema 1.0
+
+=item *
+
+L<http://www.w3.org/TR/xmlschema11-2/> Datatypes in XML Schema 1.1
+
+=back
 
 =head1 AUTHOR
 
