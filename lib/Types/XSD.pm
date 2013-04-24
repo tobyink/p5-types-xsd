@@ -176,18 +176,6 @@ my %facets = (
 		delete $o->{length};
 		"!!1"
 	},
-	explicitTimezone => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{explicitTimezone};
-		my $etz = delete $o->{explicitTimezone};
-		return sprintf('%s =~ m/(?:Z|(?:[+-]\d{2}:?\d{2}))$/xism', $var)
-			if lc($etz) eq 'required';
-		return sprintf('%s !~ m/(?:Z|(?:[+-]\d{2}:?\d{2}))$/xism', $var)
-			if lc($etz) eq 'prohibited';
-		return '!!1'
-			if lc($etz) eq 'optional';
-		croak "explicitTimezone facet expected to be 'required', 'prohibited' or 'optional'"
-	},
 	maxLengthQName => sub {
 		my ($o, $var) = @_;
 		return unless exists $o->{maxLength};
@@ -232,6 +220,18 @@ my %facets = (
 		return unless exists $o->{whiteSpace};
 		delete($o->{whiteSpace});
 		"!!1";
+	},
+	explicitTimezone => sub {
+		my ($o, $var) = @_;
+		return unless exists $o->{explicitTimezone};
+		my $etz = delete $o->{explicitTimezone};
+		return sprintf('%s =~ m/(?:Z|(?:[+-]\d{2}:?\d{2}))$/xism', $var)
+			if lc($etz) eq 'required';
+		return sprintf('%s !~ m/(?:Z|(?:[+-]\d{2}:?\d{2}))$/xism', $var)
+			if lc($etz) eq 'prohibited';
+		return '!!1'
+			if lc($etz) eq 'optional';
+		croak "explicitTimezone facet expected to be 'required', 'prohibited' or 'optional'"
 	},
 	maxInclusive => sub {
 		my ($o, $var) = @_;
@@ -751,6 +751,11 @@ Types::XSD - type constraints based on XML schema datatypes
 
 =head1 DESCRIPTION
 
+Types::XSD is a type constraint library inspired by XML Schema, and built
+with L<Type::Library>. It can be used as a type constraint library for
+L<Moo>, L<Mouse> or L<Moose>, or used completely independently of any OO
+framework.
+
 =head2 Type Constraints
 
 This module defines the following type constraints based on the data types
@@ -987,6 +992,8 @@ An month pair with optional timezone.
 
 =back
 
+=head2 Parameters
+
 Datatypes can be parameterized using the facets defined by XML Schema. For
 example:
 
@@ -999,13 +1006,86 @@ example:
    has rating => (is => "ro", isa => PositiveInteger[ maxInclusive => 5 ]);
    has size   => (is => "ro", isa => Token[ enumeration => \@sizes ]);
 
+The following facets exist, but not all facets are supported for all
+datatypes. (The module will croak if you try to use an unsupported facet.)
+
+=over
+
+=item C<< enumeration >>
+
+An arrayref of allowable values. You should probably use L<Type::Tiny::Enum>
+instead.
+
+=item C<< pattern >>
+
+A regular expression that the value is expected to conform to. Use a normal
+Perl quoted regexp:
+
+   Token[ pattern => qr{^[a-z]+$} ]
+
+=item C<< whiteSpace >>
+
 The C<whiteSpace> facet is ignored as I'm not entirely sure what it should
 do. It perhaps makes sense for coercions, but this module doesn't define any
 coercions.
 
+=item C<< assertions >>
+
+An arrayref of arbitrary additional restrictions, expressed as strings of
+Perl code or coderefs operating on C<< $_ >>.
+
+For example:
+
+   Integer[
+      assertions => [
+         '$_ % 3 == 0',            # multiple of three, and...
+         sub { is_nice($_) },      # is nice (whatever that means)
+      ],
+   ],
+
+Strings of Perl code will result in faster-running type constraints.
+
+=item C<< length >>, C<< maxLength >>, C<< minLength >>
+
+Restrict the length of a value. For example C<< Integer[length=>2] >> allows
+C<10>, C<99> and C<-1>, but not C<100>, C<9> or C<-10>.
+
+Types::XSD won't prevent you from making ridiculous constraints such as
+C<< String[ maxLength => 1, minLength => 2 ] >>.
+
+Note that on C<HexBinary> and C<Base64Binary> types, the lengths apply to
+the decoded string. Length restrictions are silently ignored for C<QName>
+and C<Notation> because the W3C doesn't think you should care what length
+these datatypes are.
+
+=item C<< maxInclusive >>, C<< minInclusive >>, C<< maxExclusive >>, C<< minExclusive >>
+
+Supported for numeric types and datetime/duration-related types.
+
 Note that to be super-correct, the C<< {max,min}{Inclusive,Exclusive} >>
 facets for numeric types are performed by passing the numbers through
 L<Math::BigInt> or L<Math::BigFloat>, so may be a little slow.
+
+=item C<< totalDigits >>
+
+For a decimal (or type derived from decimals) specifies that the total number
+of digits for the value must be at most this number. Given
+C<< Decimal[ totalDigits => 3 ] >>, C<1.23>, C<12.3>, C<123>, C<1.2> and C<1>
+are all allowable; C<1.234> is not. C<1.230> is also not, but this may change
+in a future version.
+
+=item C<< fractionDigits >>
+
+Like C<totalDigits> but ignores digits before the decimal point.
+
+=item C<< explicitTimezone >>
+
+May be C<< "optional" >>, C<< "prohibited" >> or C<< "required" >>. For
+example:
+
+   Time[ explicitTimezone => "prohibited" ]
+
+=back
 
 =head2 Functions
 
