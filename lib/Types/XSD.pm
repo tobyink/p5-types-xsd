@@ -117,15 +117,21 @@ my %facets = (
 		for my $a (@$ass)
 		{
 			require Types::TypeTiny;
-			if (Types::TypeTiny::CodeLike->check($a))
+			if (Types::TypeTiny::CodeLike()->check($a))
 			{
 				$assertion_i++;
 				$assertions[$assertion_i] = $a;
-				push @r, sprintf('$Types::XSD::assertions[%d]->(%s)', $assertion_i, $var);
+				push @r,
+					($var eq '$_')
+						? sprintf('$Types::XSD::assertions[%d]->(%s)', $assertion_i, $var)
+						: sprintf('do { local $_ = %s; $Types::XSD::assertions[%d]->(%s) }', $var, $assertion_i, $var);
 			}
-			elsif (Types::TypeTiny::StringLike->check($a))
+			elsif (Types::TypeTiny::StringLike()->check($a))
 			{
-				push @r, ($var eq '$_') ? "do { $a }" : "do { local $_ = $var; $a }";
+				push @r,
+					($var eq '$_')
+						? "do { $a }"
+						: "do { local \$_ = $var; $a }";
 			}
 			else
 			{
@@ -342,7 +348,7 @@ my %facets = (
 sub facet
 {
 	my $self   = pop;
-	my @facets = @_;
+	my @facets = ("assertion", @_);
 	my $regexp = qr{^${\(join "|", map quotemeta, @facets)}$}ms;
 	my $name   = "$self";
 	
