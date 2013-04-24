@@ -108,10 +108,10 @@ sub b64_length
 our @patterns;   my $pattern_i = -1;
 our @assertions; my $assertion_i = -1;
 my %facets = (
-	assertion => sub {
+	assertions => sub {
 		my ($o, $var) = @_;
-		return unless exists $o->{assertion};
-		my $ass = delete $o->{assertion};
+		return unless exists $o->{assertions};
+		my $ass = delete $o->{assertions};
 		$ass = [$ass] unless ref($ass) eq q(ARRAY);
 		my @r;
 		for my $a (@$ass)
@@ -348,7 +348,7 @@ my %facets = (
 sub facet
 {
 	my $self   = pop;
-	my @facets = ("assertion", @_);
+	my @facets = ("assertions", @_);
 	my $regexp = qr{^${\(join "|", map quotemeta, @facets)}$}ms;
 	my $name   = "$self";
 	
