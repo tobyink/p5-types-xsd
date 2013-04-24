@@ -7,7 +7,7 @@ use utf8;
 
 BEGIN {
 	$Types::XSD::AUTHORITY = 'cpan:TOBYINK';
-	$Types::XSD::VERSION   = '0.000_02';
+	$Types::XSD::VERSION   = '0.000_01';
 }
 
 use B qw(perlstring);
@@ -419,7 +419,7 @@ sub dur_parse
 		my $A = eval($cache{"$type;a"} ||= $type->inline_check('$a'));
 		my $B = eval($cache{"$type;b"} ||= $type->inline_check('$b'));
 		$A <=> $B;
-	}
+	}	
 }
 
 use Types::Standard;
@@ -688,6 +688,9 @@ defined in L<XML Schema|http://www.w3.org/TR/xmlschema-2/>. (The names of
 the type constraints are the same as the XML Schema data types, but
 capitalization often differs.)
 
+I've added some explainations of what some of the more interesting
+non-obvious types are:
+
 =over
 
 =item C<< AnyType >>
@@ -698,33 +701,78 @@ capitalization often differs.)
 
 =item C<< NormalizedString >>
 
+A string containing no line breaks, carriage returns or tabs.
+
 =item C<< Token >>
+
+Like C<NormalizedString>, but also no leading or trailing space, and no
+doubled spaces (i.e. not C<< /\s{2,}/ >>).
 
 =item C<< Language >>
 
+An RFC 3066 language code.
+
 =item C<< Name >>
+
+Something that could be a valid XML element or attribute name. These roughly
+correspond to Perl identifiers but may also contain colons, hyphens and stops.
+(Digits, hyphens and stops are not allowed as the first character.)
 
 =item C<< NmToken >>
 
+Slightly looser version of C<Name>; allows digits, hyphens and stops in the
+first character.
+
 =item C<< NmTokens >>
+
+Space-separated list of C<NmToken>.
 
 =item C<< NCName >>
 
+Slightly tighter vesion of C<Name>; disallows colons.
+
 =item C<< Id >>
+
+Effectively the same as C<NCName>.
 
 =item C<< IdRef >>
 
+Effectively the same as C<NCName>.
+
 =item C<< IdRefs >>
+
+Space-separated list of C<IdRef>.
 
 =item C<< Entity >>
 
+Effectively the same as C<NCName>.
+
 =item C<< Entities >>
+
+Space-separated list of C<Entity>.
 
 =item C<< Boolean >>
 
+Allows C<< "true" >>, C<< "false" >>, C<< "1" >> and C<< "0" >>
+(case-insensitively).
+
+Gotcha: The string C<< "false" >> evaluates to true in Perl. You probably
+want to use C<< Bool >> from L<Types::Standard> instead.
+
 =item C<< Base64Binary >>
 
+Strings which are valid Base64 data. Allows whitespace.
+
+Gotcha: If you parameterize this with C<length>, C<maxLength> or C<minLength>,
+it is the length of the I<decoded> string which will be checked.
+
 =item C<< HexBinary >>
+
+Strings which are valid hexadecimal data. Disallows whitespace; disallows
+leading C<< 0x >>.
+
+Gotcha: If you parameterize this with C<length>, C<maxLength> or C<minLength>,
+it is the length of the I<decoded> string which will be checked.
 
 =item C<< Float >>
 
@@ -732,9 +780,23 @@ capitalization often differs.)
 
 =item C<< AnyURI >>
 
+Any absolute I<< or relative >> URI. Effectively, any string at all!
+
 =item C<< QName >>
 
+An XML QName; something that could be used as a valid element name in a
+namespaced XML document.
+
+Gotcha: while C<length>, C<maxLength> and C<minLength> are allowed facets for
+parameterization, they are silently ignored, as per the specification!
+
 =item C<< Notation >>
+
+Effectively the same as C<QName>. According to XML Schema, this is I<always>
+supposed to be parameterized with an enumeration. But we don't enforce that.
+
+Gotcha: while C<length>, C<maxLength> and C<minLength> are allowed facets for
+parameterization, they are silently ignored, as per the specification!
 
 =item C<< Decimal >>
 
