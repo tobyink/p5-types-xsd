@@ -22,3 +22,9 @@
 		item "assertions parameter"^^Addition;
 	].
 
+`Types-XSD 0.000_04 cpan:TOBYINK`
+	issued  2013-04-28;
+	changeset [
+		item "Bundle a version of Type::Tiny for testing purposes (only in developer previews; not for stable releases)."^^Packaging;
+	].
+
