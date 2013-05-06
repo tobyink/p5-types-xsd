@@ -7,7 +7,7 @@ use utf8;
 
 BEGIN {
 	$Types::XSD::AUTHORITY = 'cpan:TOBYINK';
-	$Types::XSD::VERSION   = '0.000_04';
+	$Types::XSD::VERSION   = '0.001';
 }
 
 use B qw(perlstring);

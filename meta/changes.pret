@@ -28,3 +28,8 @@
 		item "Bundle a version of Type::Tiny for testing purposes (only in developer previews; not for stable releases)."^^Packaging;
 	].
 
+`Types-XSD 0.001 cpan:TOBYINK`
+	issued  2013-04-28;
+	label   "First public release";
+	comment "No functional changes".
+
