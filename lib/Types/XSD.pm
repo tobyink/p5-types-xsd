@@ -988,7 +988,7 @@ An day with optional timezone.
 
 =item C<< GMonth >>
 
-An month pair with optional timezone.
+An month with optional timezone.
 
 =back
 
