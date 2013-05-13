@@ -33,3 +33,9 @@
 	label   "First public release";
 	comment "No functional changes".
 
+`Types-XSD 0.002 cpan:TOBYINK`
+	issued  2013-05-13;
+	changeset [
+		item "Require DateTimeX::Auto 0.004."^^Packaging;
+	].
+
