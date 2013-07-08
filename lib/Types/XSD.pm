@@ -167,9 +167,18 @@ sub dur_parse
 
 {
 	my %cache;
+	sub _detect_type
+	{
+		my ($lib, $v) = @_;
+		for my $type (qw(DateTime Time Date GYearMonth GYear GMonthDay GDay GMonth)) {
+			return $type if $lib->get_type($type)->check($v);
+		}
+		return $lib->get_type('DateTime');
+	}
 	sub dt_cmp
 	{
 		my ($type, $a, $b) = @_;
+		$type = __PACKAGE__->_detect_type($a) unless $type;
 		$type = __PACKAGE__->get_type($type) unless ref $type;
 		my $A = eval($cache{"$type;a"} ||= $type->inline_check('$a'));
 		my $B = eval($cache{"$type;b"} ||= $type->inline_check('$b'));
