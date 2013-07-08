@@ -39,3 +39,9 @@
 		item "Require DateTimeX::Auto 0.004."^^Packaging;
 	].
 
+`Types-XSD 0.003 cpan:TOBYINK`
+	issued  2013-07-08;
+	changeset [
+		item "Split out easy types into Types::XSD::Lite, which this module now depends on."^^Packaging;
+	].
+
