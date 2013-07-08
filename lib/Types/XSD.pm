@@ -7,78 +7,35 @@ use utf8;
 
 BEGIN {
 	$Types::XSD::AUTHORITY = 'cpan:TOBYINK';
-	$Types::XSD::VERSION   = '0.002';
+	$Types::XSD::VERSION   = '0.003';
 }
 
 use B qw(perlstring);
 use Carp;
 use DateTimeX::Auto qw( dt dur );
 use DateTime::Incomplete ();
+use Type::Utils;
+use Type::Library -base, -declare => qw(
+	Name NmToken NmTokens NCName Id IdRef IdRefs Entity Entities
+	QName Notation Duration DateTime Time Date GYearMonth
+	GYear GMonthDay GDay GMonth
+	DateTimeStamp YearMonthDuration DayTimeDuration
+);
+use Types::Standard;
+use Types::XSD::Lite 0.003 ();
 use XML::RegExp;
 
-our $T;
+our @EXPORT_OK = qw( dt_cmp dur_cmp dt_parse dur_parse );
 
-sub create_range_check
-{
-	my $class = $_[0]; eval "require $class";
-	my ($lower, $upper) = map(defined($_) ? $class->new($_) : $_, @_[1,2]);
-	my ($lexcl, $uexcl) = map(!!$_, @_[3,4]);
+BEGIN {
+	Type::Utils::extends('Types::XSD::Lite');
 	
-	my $checker =
-		(defined $lower and defined $upper and $lexcl and $uexcl)
-			? sub { my $n = $class->new($_); $n > $lower and $n < $upper } :
-		(defined $lower and defined $upper and $lexcl)
-			? sub { my $n = $class->new($_); $n > $lower and $n <= $upper } :
-		(defined $lower and defined $upper and $uexcl)
-			? sub { my $n = $class->new($_); $n >= $lower and $n < $upper } :
-		(defined $lower and defined $upper)
-			? sub { my $n = $class->new($_); $n >= $lower and $n <= $upper } :
-		(defined $lower and $lexcl)
-			? sub { $class->new($_) > $lower } :
-		(defined $upper and $uexcl)
-			? sub { $class->new($_) < $upper } :
-		(defined $lower)
-			? sub { $class->new($_) >= $lower } :
-		(defined $upper)
-			? sub { $class->new($_) <= $upper } :
-		sub { !!1 };
-	
-	my $inlined = sub {
-		my $var = $_[1];
-		my @checks;
-		push @checks, sprintf('$n >%s "%s"->new("%s")', $lexcl?'':'=', $class, $lower) if defined $lower;
-		push @checks, sprintf('$n <%s "%s"->new("%s")', $uexcl?'':'=', $class, $upper) if defined $upper;
-		my $code = sprintf(
-			'%s and do { my $n = "%s"->new(%s); %s }',
-			Types::Standard::Int()->inline_check($var),
-			$class,
-			$var,
-			join(" and ", @checks),
-		);
-	};
-	
-	return (
-		constraint  => $checker,
-		inlined     => $inlined,
-	);
-}
-
-sub quick_range_check
-{
-	my $class = $_[0]; eval "require $class";
-	my ($lower, $upper) = map(defined($_) ? $class->new($_) : $_, @_[1,2]);
-	my ($lexcl, $uexcl) = map(!!$_, @_[3,4]);
-	my $var = $_[5];
-	my @checks;
-	push @checks, sprintf('$n >%s "%s"->new("%s")', $lexcl?'':'=', $class, $lower) if defined $lower;
-	push @checks, sprintf('$n <%s "%s"->new("%s")', $uexcl?'':'=', $class, $upper) if defined $upper;
-	my $code = sprintf(
-		'do { my $n = "%s"->new(%s); %s }',
-		$class,
-		$var,
-		join(" and ", @checks),
-	);
-}
+	*create_range_check = \&Types::XSD::Lite::create_range_check;
+	*quick_range_check  = \&Types::XSD::Lite::quick_range_check;
+	*hex_length         = \&Types::XSD::Lite::hex_length;
+	*b64_length         = \&Types::XSD::Lite::b64_length;
+	*facet              = \&Types::XSD::Lite::facet;
+};
 
 use constant MAGIC_DATES => map dt($_), qw( 1696-09-01 1697-02-01 1903-03-01 1903-07-01 );
 use constant MAGIC_TABLE => +{ "-1-1-1-1" => -1, "0000" => 0, "1111" => 1 };
@@ -90,137 +47,9 @@ sub dur_cmp
 	return undef;
 }
 
-sub hex_length
-{
-	my $str = shift;
-	my $len = ($str =~ tr/0-9A-Fa-f//);
-	$len / 2;
-}
-
-sub b64_length
-{
-	my $str = shift;
-	$str =~ s/[^a-zA-Z0-9+\x{2f}=]//g;
-	my $padding = ($str =~ tr/=//);
-	(length($str) * 3 / 4) - $padding;
-}
-
 our @patterns;   my $pattern_i = -1;
 our @assertions; my $assertion_i = -1;
 my %facets = (
-	assertions => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{assertions};
-		my $ass = delete $o->{assertions};
-		$ass = [$ass] unless ref($ass) eq q(ARRAY);
-		my @r;
-		for my $a (@$ass)
-		{
-			require Types::TypeTiny;
-			if (Types::TypeTiny::CodeLike()->check($a))
-			{
-				$assertion_i++;
-				$assertions[$assertion_i] = $a;
-				push @r,
-					($var eq '$_')
-						? sprintf('$Types::XSD::assertions[%d]->(%s)', $assertion_i, $var)
-						: sprintf('do { local $_ = %s; $Types::XSD::assertions[%d]->(%s) }', $var, $assertion_i, $var);
-			}
-			elsif (Types::TypeTiny::StringLike()->check($a))
-			{
-				push @r,
-					($var eq '$_')
-						? "do { $a }"
-						: "do { local \$_ = $var; $a }";
-			}
-			else
-			{
-				croak "assertions should be strings or coderefs";
-			}
-		}
-		join ' && ', map "($_)", @r;
-	},
-	length => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{length};
-		sprintf('length(%s)==%d', $var, delete $o->{length});
-	},
-	maxLength => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{maxLength};
-		sprintf('length(%s)<=%d', $var, delete $o->{maxLength});
-	},
-	minLength => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{minLength};
-		sprintf('length(%s)>=%d', $var, delete $o->{minLength});
-	},
-	lengthHex => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{length};
-		sprintf('Types::XSD::hex_length(%s)==%d', $var, delete $o->{length});
-	},
-	maxLengthHex => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{maxLength};
-		sprintf('Types::XSD::hex_length(%s)<=%d', $var, delete $o->{maxLength});
-	},
-	minLengthHex => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{minLength};
-		sprintf('Types::XSD::hex_length(%s)>=%d', $var, delete $o->{minLength});
-	},
-	lengthQName => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{length};
-		delete $o->{length};
-		"!!1"
-	},
-	maxLengthQName => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{maxLength};
-		delete $o->{maxLength};
-		"!!1"
-	},
-	minLengthQName => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{minLength};
-		delete $o->{minLength};
-		"!!1"
-	},
-	lengthB64 => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{length};
-		sprintf('Types::XSD::b64_length(%s)==%d', $var, delete $o->{length});
-	},
-	maxLengthB64 => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{maxLength};
-		sprintf('Types::XSD::b64_length(%s)<=%d', $var, delete $o->{maxLength});
-	},
-	minLengthB64 => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{minLength};
-		sprintf('Types::XSD::b64_length(%s)>=%d', $var, delete $o->{minLength});
-	},
-	pattern => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{pattern};
-		$patterns[++$pattern_i] = delete $o->{pattern};
-		sprintf('%s =~ $Types::XSD::patterns[%d]', $var, $pattern_i);
-	},
-	enumeration => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{enumeration};
-		my $re = join "|", map quotemeta, @{delete $o->{enumeration}};
-		sprintf('%s =~ m/^(?:%s)$/sm', $var, $re);
-	},
-	whiteSpace => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{whiteSpace};
-		delete($o->{whiteSpace});
-		"!!1";
-	},
 	explicitTimezone => sub {
 		my ($o, $var) = @_;
 		return unless exists $o->{explicitTimezone};
@@ -232,66 +61,6 @@ my %facets = (
 		return '!!1'
 			if lc($etz) eq 'optional';
 		croak "explicitTimezone facet expected to be 'required', 'prohibited' or 'optional'"
-	},
-	maxInclusive => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{maxInclusive};
-		quick_range_check("Math::BigInt", undef, delete($o->{maxInclusive}), undef, undef, $var);
-	},
-	minInclusive => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{minInclusive};
-		quick_range_check("Math::BigInt", delete($o->{minInclusive}), undef, undef, undef, $var);
-	},
-	maxExclusive => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{maxExclusive};
-		quick_range_check("Math::BigInt", undef, delete($o->{maxExclusive}), undef, 1, $var);
-	},
-	minExclusive => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{minExclusive};
-		quick_range_check("Math::BigInt", delete($o->{minExclusive}), undef, 1, undef, $var);
-	},
-	maxInclusiveFloat => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{maxInclusive};
-		quick_range_check("Math::BigFloat", undef, delete($o->{maxInclusive}), undef, undef, $var);
-	},
-	minInclusiveFloat => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{minInclusive};
-		quick_range_check("Math::BigFloat", delete($o->{minInclusive}), undef, undef, undef, $var);
-	},
-	maxExclusiveFloat => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{maxExclusive};
-		quick_range_check("Math::BigFloat", undef, delete($o->{maxExclusive}), undef, 1, $var);
-	},
-	minExclusiveFloat => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{minExclusive};
-		quick_range_check("Math::BigFloat", delete($o->{minExclusive}), undef, 1, undef, $var);
-	},
-	maxInclusiveStr => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{maxInclusive};
-		sprintf('%s le %s', $var, perlstring delete $o->{maxInclusive});
-	},
-	minInclusiveStr => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{minInclusive};
-		sprintf('%s ge %s', $var, perlstring delete $o->{minInclusive});
-	},
-	maxExclusiveStr => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{maxExclusive};
-		sprintf('%s lt %s', $var, perlstring delete $o->{maxExclusive});
-	},
-	minExclusiveStr => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{minExclusive};
-		sprintf('%s gt %s', $var, perlstring delete $o->{minExclusive});
 	},
 	maxInclusiveDuration => sub {
 		my ($o, $var) = @_;
@@ -316,85 +85,26 @@ my %facets = (
 	maxInclusiveDT => sub {
 		my ($o, $var) = @_;
 		return unless exists $o->{maxInclusive};
-		sprintf('(Types::XSD::dt_cmp(%s, %s, %s)||0) <= 0', perlstring($T), $var, perlstring delete $o->{maxInclusive});
+		sprintf('(Types::XSD::dt_cmp(%s, %s, %s)||0) <= 0', perlstring($Types::XSD::Lite::T), $var, perlstring delete $o->{maxInclusive});
 	},
 	minInclusiveDT => sub {
 		my ($o, $var) = @_;
 		return unless exists $o->{minInclusive};
-		sprintf('(Types::XSD::dt_cmp(%s, %s, %s)||0) >= 0', perlstring($T), $var, perlstring delete $o->{minInclusive});
+		sprintf('(Types::XSD::dt_cmp(%s, %s, %s)||0) >= 0', perlstring($Types::XSD::Lite::T), $var, perlstring delete $o->{minInclusive});
 	},
 	maxExclusiveDT => sub {
 		my ($o, $var) = @_;
 		return unless exists $o->{maxExclusive};
-		sprintf('(Types::XSD::dt_cmp(%s, %s, %s)||0) < 0', perlstring($T), $var, perlstring delete $o->{maxExclusive});
+		sprintf('(Types::XSD::dt_cmp(%s, %s, %s)||0) < 0', perlstring($Types::XSD::Lite::T), $var, perlstring delete $o->{maxExclusive});
 	},
 	minExclusiveDT => sub {
 		my ($o, $var) = @_;
 		return unless exists $o->{minExclusive};
-		sprintf('(Types::XSD::dt_cmp(%s, %s, %s)||0) > 0', perlstring($T), $var, perlstring delete $o->{minExclusive});
-	},
-	totalDigits => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{totalDigits};
-		sprintf('do { no warnings "uninitialized"; my $tmp = %s; ($tmp=~tr/0-9//) <= %d }', $var, delete $o->{totalDigits});
-	},
-	fractionDigits => sub {
-		my ($o, $var) = @_;
-		return unless exists $o->{fractionDigits};
-		sprintf('do { no warnings "uninitialized"; my (undef, $tmp) = split /\\./, %s; ($tmp=~tr/0-9//) <= %d }', $var, delete $o->{fractionDigits});
+		sprintf('(Types::XSD::dt_cmp(%s, %s, %s)||0) > 0', perlstring($Types::XSD::Lite::T), $var, perlstring delete $o->{minExclusive});
 	},
 );
 
-sub facet
-{
-	my $self   = pop;
-	my @facets = ("assertions", @_);
-	my $regexp = qr{^${\(join "|", map quotemeta, @facets)}$}ms;
-	my $name   = "$self";
-	
-	my $inline_generator = sub
-	{
-		my %p = @_;
-		return sub {
-			local $T = $_[0]->parent;
-			my $var  = $_[1];
-			my $r    = sprintf(
-				'(%s)',
-				join(
-					' and ',
-					$self->inline_check($var),
-					map($facets{$_}->(\%p, $var), @facets),
-				),
-			);
-			croak sprintf(
-				'Attempt to parameterize type "%s" with unrecognised parameter%s %s',
-				$name,
-				scalar(keys %p)==1 ? '' : 's',
-				join(", ", map(qq["$_"], sort keys %p)),
-			) if keys %p;
-			return $r;
-		};
-	};
-	
-	$self->{inline_generator} = $inline_generator;
-	$self->{constraint_generator} = sub {
-		my $sub = sprintf(
-			'sub { %s }',
-			$inline_generator->(@_)->($self, '$_[0]'),
-		);
-		eval($sub) or croak "could not build sub: $@\n\nCODE: $sub\n";
-	};
-	$self->{name_generator} = sub {
-		my ($s, %a) = @_;
-		sprintf('%s[%s]', $s, join q[,], map sprintf("%s=>%s", $_, perlstring $a{$_}), sort keys %a);
-	};
-	
-	return if $self->is_anon;
-	
-	no strict qw( refs );
-	no warnings qw( redefine prototype );
-	*{$self->name} = __PACKAGE__->_mksub($self);
-}
+$Types::XSD::Lite::facets{$_} = $facets{$_} for keys %facets;
 
 our @dtarr;
 my $i = -1;
@@ -467,42 +177,6 @@ sub dur_parse
 	}
 }
 
-use Types::Standard;
-use Type::Utils;
-use Type::Library -base, -declare => qw(
-	AnyType AnySimpleType String NormalizedString Token Language Name
-	NmToken NmTokens NCName Id IdRef IdRefs Entity Entities Boolean
-	Base64Binary HexBinary Float Double AnyURI QName Notation Decimal
-	Integer NonPositiveInteger NegativeInteger Long Int Short Byte
-	NonNegativeInteger PositiveInteger UnsignedLong UnsignedInt
-	UnsignedShort UnsignedByte Duration DateTime Time Date GYearMonth
-	GYear GMonthDay GDay GMonth
-	DateTimeStamp YearMonthDuration DayTimeDuration
-);
-
-our @EXPORT_OK = qw( dt_cmp dur_cmp dt_parse dur_parse );
-
-declare AnyType, as Types::Standard::Any;
-
-declare AnySimpleType, as Types::Standard::Value;
-
-facet qw( length minLength maxLength pattern enumeration whiteSpace ),
-declare String, as Types::Standard::Str;
-
-facet qw( length minLength maxLength pattern enumeration whiteSpace ),
-declare NormalizedString, as Types::Standard::StrMatch[qr{^[^\t\r\n]*$}sm];
-
-facet qw( length minLength maxLength pattern enumeration whiteSpace ),
-declare Token, as intersection([
-	NormalizedString,
-	Types::Standard::StrMatch([qr{^\s}sm])->complementary_type,
-	Types::Standard::StrMatch([qr{\s$}sm])->complementary_type,
-	Types::Standard::StrMatch([qr{\s{2}}sm])->complementary_type,
-]);
-
-facet qw( length minLength maxLength pattern enumeration whiteSpace ),
-declare Language, as Types::Standard::StrMatch[qr{^[a-zA-Z]{1,8}(?:-[a-zA-Z0-9]{1,8})*$}sm];
-
 facet qw( length minLength maxLength pattern enumeration whiteSpace ),
 declare Name, as Types::Standard::StrMatch[qr{^(?:$XML::RegExp::Name)$}sm];
 
@@ -530,71 +204,11 @@ declare Entity, as NCName;
 facet qw( length minLength maxLength pattern enumeration whiteSpace ),
 declare Entities, as Types::Standard::StrMatch[qr{^(?:$XML::RegExp::NCName)(?:\s+$XML::RegExp::NCName)*$}sm];
 
-facet qw( pattern whiteSpace ),
-declare Boolean, as Types::Standard::StrMatch[qr{^(?:true|false|0|1)$}ism];
-
-facet qw( lengthB64 minLengthB64 maxLengthB64 pattern enumeration whiteSpace ),
-declare Base64Binary, as Types::Standard::StrMatch[qr{^[a-zA-Z0-9+\x{2f}=\s]+$}ism];
-
-facet qw( lengthHex minLengthHex maxLengthHex pattern enumeration whiteSpace ),
-declare HexBinary, as Types::Standard::StrMatch[qr{^[a-fA-F0-9]+$}ism];
-
-facet qw( pattern enumeration whiteSpace maxInclusiveFloat maxExclusiveFloat minInclusiveFloat minExclusiveFloat ),
-declare Float, as Types::Standard::Num;
-
-facet qw( pattern enumeration whiteSpace maxInclusiveFloat maxExclusiveFloat minInclusiveFloat minExclusiveFloat ),
-declare Double, as Types::Standard::Num;
-
-facet qw( length minLength maxLength pattern enumeration whiteSpace ),
-declare AnyURI, as Types::Standard::Str;
-
 facet qw( lengthQName minLengthQName maxLengthQName pattern enumeration whiteSpace ),
 declare QName, as Types::Standard::StrMatch[qr{^(?:$XML::RegExp::QName)$}sm];
 
 facet qw( lengthQName minLengthQName maxLengthQName pattern enumeration whiteSpace ),
 declare Notation, as QName;
-
-facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusiveFloat maxExclusiveFloat minInclusiveFloat minExclusiveFloat ),
-declare Decimal, as Types::Standard::StrMatch[qr{^(?:(?:[+-]?[0-9]+(?:\.[0-9]+)?)|(?:[+-]?\.[0-9]+))$}ism];
-
-facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusive maxExclusive minInclusive minExclusive ),
-declare Integer, as Types::Standard::Int;
-
-facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusive maxExclusive minInclusive minExclusive ),
-declare NonPositiveInteger, as Integer, create_range_check("Math::BigInt", undef, 0);
-
-facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusive maxExclusive minInclusive minExclusive ),
-declare NegativeInteger, as NonPositiveInteger, create_range_check("Math::BigInt", undef, -1);
-
-facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusive maxExclusive minInclusive minExclusive ),
-declare NonNegativeInteger, as Integer, create_range_check("Math::BigInt", 0, undef);
-
-facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusive maxExclusive minInclusive minExclusive ),
-declare PositiveInteger, as NonNegativeInteger, create_range_check("Math::BigInt", 1, undef);
-
-facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusive maxExclusive minInclusive minExclusive ),
-declare Long, as Integer, create_range_check("Math::BigInt", q[-9223372036854775808], q[9223372036854775807]);
-
-facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusive maxExclusive minInclusive minExclusive ),
-declare Int, as Long, create_range_check("Math::BigInt", q[-2147483648], q[2147483647]);
-
-facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusive maxExclusive minInclusive minExclusive ),
-declare Short, as Int, create_range_check("Math::BigInt", q[-32768], q[32767]);
-
-facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusive maxExclusive minInclusive minExclusive ),
-declare Byte, as Short, create_range_check("Math::BigInt", q[-128], q[127]);
-
-facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusive maxExclusive minInclusive minExclusive ),
-declare UnsignedLong, as NonNegativeInteger, create_range_check("Math::BigInt", q[0], q[18446744073709551615]);
-
-facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusive maxExclusive minInclusive minExclusive ),
-declare UnsignedInt, as UnsignedLong, create_range_check("Math::BigInt", q[0], q[4294967295]);
-
-facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusive maxExclusive minInclusive minExclusive ),
-declare UnsignedShort, as UnsignedInt, create_range_check("Math::BigInt", q[0], q[65535]);
-
-facet qw( totalDigits fractionDigits pattern whiteSpace enumeration maxInclusive maxExclusive minInclusive minExclusive ),
-declare UnsignedByte, as UnsignedShort, create_range_check("Math::BigInt", q[0], q[255]);
 
 facet qw( pattern whiteSpace enumeration maxInclusiveDuration maxExclusiveDuration minInclusiveDuration minExclusiveDuration ),
 declare Duration, as Types::Standard::StrMatch[
@@ -744,7 +358,7 @@ Types::XSD - type constraints based on XML schema datatypes
    package Person;
    
    use Moo;
-   use Types::XSD qw( PositiveInteger String );
+   use Types::XSD::Lite qw( PositiveInteger String );
    
    has name => (is => "ro", isa => String[ minLength => 1 ]);
    has age  => (is => "ro", isa => PositiveInteger);
@@ -755,6 +369,11 @@ Types::XSD is a type constraint library inspired by XML Schema, and built
 with L<Type::Library>. It can be used as a type constraint library for
 L<Moo>, L<Mouse> or L<Moose>, or used completely independently of any OO
 framework.
+
+This module is an extension of L<Types::XSD::Lite> which has fewer type
+constraints, but fewer dependencies. For completeness, the type constraints
+and other features inherited from Types::XSD::Lite are documented below
+too.
 
 =head2 Type Constraints
 
@@ -997,7 +616,7 @@ An month with optional timezone.
 Datatypes can be parameterized using the facets defined by XML Schema. For
 example:
 
-   use Types::XSD qw( String Decimal PositiveInteger Token );
+   use Types::XSD::Lite qw( String Decimal PositiveInteger Token );
    
    my @sizes = qw( XS S M L XL XXL );
    
@@ -1132,7 +751,7 @@ L<http://rt.cpan.org/Dist/Display.html?Queue=Types-XSD>.
 
 =head1 SEE ALSO
 
-L<Type::Tiny>, L<Types::Standard>.
+L<Type::Tiny>, L<Types::XSD::Lite>, L<Types::Standard>.
 
 =over
 

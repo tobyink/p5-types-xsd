@@ -46,9 +46,9 @@ should_pass('2009-02-12T03:54:00', DateTime[explicitTimezone => "optional"]);
 should_fail('2009-02-12T03:54:00', DateTime[explicitTimezone => "required"]);
 should_pass('2009-02-12T03:54:00', DateTime[explicitTimezone => "prohibited"]);
 
-should_pass('2009-02-12T03:54:00', DateTime[assertions => sub { m/^2009/ }]);
+should_pass('2009-02-12T03:54:00', DateTime[assertions => [sub { m/^2009/ }]]);
 should_pass('2009-02-12T03:54:00', DateTime[assertions => 'm/^2009/']);
-should_fail('2010-02-12T03:54:00', DateTime[assertions => sub { m/^2009/ }]);
+should_fail('2010-02-12T03:54:00', DateTime[assertions => [sub { m/^2009/ }]]);
 should_fail('2010-02-12T03:54:00', DateTime[assertions => 'm/^2009/']);
 
 should_pass('2009-02-12T03:54:00', DateTime[assertions => [sub { m/^2009/ }, 'm/-02-/']]);

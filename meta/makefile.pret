@@ -8,7 +8,8 @@
 	requires          p`DateTimeX::Auto 0.004`;
 	requires          p`Type::Library 0.004`;
 	requires          p`XML::RegExp 0`;
-	test_requires     p`Test::More 0.88`;
+	requires          p`Types::XSD::Lite 0.003`;
+	test_requires     p`Test::More 0.96`;
 	test_requires     p`Test::TypeTiny 0.004`;
 .
 
