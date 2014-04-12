@@ -1,15 +1,13 @@
 # This file provides instructions for packaging.
 
+@prefix : <http://ontologi.es/doap-deps#>.
+
 `Types-XSD`
-	perl_version_from m`Types::XSD`;
-	version_from      m`Types::XSD`;
-	readme_from       m`Types::XSD`;
-	requires          p`DateTime::Incomplete 0`;
-	requires          p`DateTimeX::Auto 0.004`;
-	requires          p`Type::Library 0.004`;
-	requires          p`XML::RegExp 0`;
-	requires          p`Types::XSD::Lite 0.003`;
-	test_requires     p`Test::More 0.96`;
-	test_requires     p`Test::TypeTiny 0.004`;
-.
+	:runtime-requirement     [ :on "DateTime::Incomplete 0"^^CpanId ];
+	:runtime-requirement     [ :on "DateTimeX::Auto 0.004"^^CpanId ];
+	:runtime-requirement     [ :on "Type::Library 0.004"^^CpanId ];
+	:runtime-requirement     [ :on "XML::RegExp 0"^^CpanId ];
+	:runtime-requirement     [ :on "Types::XSD::Lite 0.003"^^CpanId ];
+	:test-requirement        [ :on "Test::More 0.96"^^CpanId ];
+	:test-requirement        [ :on "Test::TypeTiny 0.004"^^CpanId ].
 
