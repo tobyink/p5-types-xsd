@@ -3,10 +3,10 @@
 @prefix : <http://ontologi.es/doap-deps#>.
 
 `Types-XSD`
-	:runtime-requirement     [ :on "DateTime::Incomplete 0"^^CpanId ];
-	:runtime-requirement     [ :on "DateTimeX::Auto 0.004"^^CpanId ];
-	:runtime-requirement     [ :on "Type::Library 0.004"^^CpanId ];
-	:runtime-requirement     [ :on "XML::RegExp 0"^^CpanId ];
-	:runtime-requirement     [ :on "Types::XSD::Lite 0.004"^^CpanId ];
-	:test-requirement        [ :on "Test::More 0.96"^^CpanId ];
-	:test-requirement        [ :on "Test::TypeTiny 0.004"^^CpanId ].
+	:runtime-requirement     [ :on "DateTime::Incomplete 0"^^:CpanId ];
+	:runtime-requirement     [ :on "DateTimeX::Auto 0.004"^^:CpanId ];
+	:runtime-requirement     [ :on "Type::Library 0.004"^^:CpanId ];
+	:runtime-requirement     [ :on "XML::RegExp 0"^^:CpanId ];
+	:runtime-requirement     [ :on "Types::XSD::Lite 0.004"^^:CpanId ];
+	:test-requirement        [ :on "Test::More 0.96"^^:CpanId ];
+	:test-requirement        [ :on "Test::TypeTiny 0.004"^^:CpanId ].
