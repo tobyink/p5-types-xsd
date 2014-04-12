@@ -45,3 +45,10 @@
 		item "Split out easy types into Types::XSD::Lite, which this module now depends on."^^Packaging;
 	].
 
+`Types-XSD 0.004 cpan:TOBYINK`
+	issued  2014-04-12;
+	changeset [
+		item "Depend on Types::XSD::Lite 0.004, which includes a pretty important bug fix."^^Packaging;
+		item "use Dist::Inkt."^^Packaging;
+	].
+
