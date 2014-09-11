@@ -221,7 +221,7 @@ declare Notation, as QName;
 
 facet qw( pattern whiteSpace enumeration maxInclusiveDuration maxExclusiveDuration minInclusiveDuration minExclusiveDuration ),
 declare Duration, as Types::Standard::StrMatch[
-	qr{^P
+	qr{^-?P
 		(?:[0-9]+Y)?
 		(?:[0-9]+M)?
 		(?:[0-9]+D)?
@@ -234,10 +234,10 @@ declare Duration, as Types::Standard::StrMatch[
 ];
 
 facet qw( pattern whiteSpace enumeration maxInclusiveDuration maxExclusiveDuration minInclusiveDuration minExclusiveDuration ),
-declare YearMonthDuration, as Duration->parameterize(pattern => qr{^[^DT]*$});
+declare YearMonthDuration, as Duration->parameterize(pattern => qr{^[^DT]*$}i);
 
 facet qw( pattern whiteSpace enumeration maxInclusiveDuration maxExclusiveDuration minInclusiveDuration minExclusiveDuration ),
-declare DayTimeDuration, as Duration->parameterize(pattern => qr{^[^YM]*[DT].*$});
+declare DayTimeDuration, as Duration->parameterize(pattern => qr{^[^YM]*[DT].*$}i);
 
 dt_maker(
 	DateTime => qr{^
