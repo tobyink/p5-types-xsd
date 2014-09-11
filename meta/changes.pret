@@ -52,3 +52,14 @@
 		item "use Dist::Inkt."^^Packaging;
 	].
 
+`Types-XSD 0.005 cpan:TOBYINK`
+	issued  2014-09-11;
+	changeset [
+		item [
+			a dcs:Bugfix;
+			label "Add support for negative durations.";
+			dcs:fixes RT#89005;
+			dcs:thanks [ foaf:nick "mprentice" ];
+		];
+	].
+
