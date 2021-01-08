@@ -63,3 +63,20 @@
 		];
 	].
 
+`Types-XSD 0.006 cpan:TOBYINK`
+	issued  2021-01-08;
+	changeset [
+		item [
+			a dcs:Bugfix;
+			label "Fix regexps being applied to multiline strings.";
+		];
+		item [
+			a dcs:Packaging;
+			label "Require newest Types::XSD::Lite.";
+		];
+		item [
+			a dcs:Bugfix;
+			label "Silence warnings.";
+		];
+	].
+
