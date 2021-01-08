@@ -84,3 +84,14 @@
 		];
 	].
 
+`Types-XSD 0.007 cpan:TOBYINK`
+	issued  2021-01-08;
+	changeset [
+		item [
+			a dcs:Documentation;
+			label "Don't `use Types::XSD::Lite` in examples.";
+			dcs:fixes RT#121089;
+			dcs:thanks cpan:DJERIUS;
+		];
+	].
+
