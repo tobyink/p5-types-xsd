@@ -75,6 +75,10 @@
 			label "Require newest Types::XSD::Lite.";
 		];
 		item [
+			a dcs:Packaging;
+			label "Explicit dependency on Perl 5.8.3.";
+		];
+		item [
 			a dcs:Bugfix;
 			label "Silence warnings.";
 		];

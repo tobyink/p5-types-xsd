@@ -3,6 +3,7 @@
 @prefix : <http://ontologi.es/doap-deps#>.
 
 `Types-XSD`
+	:runtime-requirement     [ :on "perl 5.008003"^^:CpanId ];
 	:runtime-requirement     [ :on "DateTime::Incomplete 0"^^:CpanId ];
 	:runtime-requirement     [ :on "DateTimeX::Auto 0.004"^^:CpanId ];
 	:runtime-requirement     [ :on "Type::Library 1.000000"^^:CpanId ];
