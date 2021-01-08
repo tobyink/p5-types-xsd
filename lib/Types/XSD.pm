@@ -372,7 +372,7 @@ Types::XSD - type constraints based on XML schema datatypes
    package Person;
    
    use Moo;
-   use Types::XSD::Lite qw( PositiveInteger String );
+   use Types::XSD qw( PositiveInteger String );
    
    has name => (is => "ro", isa => String[ minLength => 1 ]);
    has age  => (is => "ro", isa => PositiveInteger);
@@ -384,8 +384,8 @@ with L<Type::Library>. It can be used as a type constraint library for
 L<Moo>, L<Mouse> or L<Moose>, or used completely independently of any OO
 framework.
 
-This module is an extension of L<Types::XSD::Lite> which has fewer type
-constraints, but fewer dependencies. For completeness, the type constraints
+This module is an extension of L<Types::XSD::Lite> (which has fewer type
+constraints, but fewer dependencies). For completeness, the type constraints
 and other features inherited from Types::XSD::Lite are documented below
 too.
 
@@ -630,7 +630,7 @@ An month with optional timezone.
 Datatypes can be parameterized using the facets defined by XML Schema. For
 example:
 
-   use Types::XSD::Lite qw( String Decimal PositiveInteger Token );
+   use Types::XSD qw( String Decimal PositiveInteger Token );
    
    my @sizes = qw( XS S M L XL XXL );
    
