@@ -41,7 +41,10 @@ use constant MAGIC_DATES => map dt($_), qw( 1696-09-01 1697-02-01 1903-03-01 190
 use constant MAGIC_TABLE => +{ "-1-1-1-1" => -1, "0000" => 0, "1111" => 1 };
 sub dur_cmp
 {
-	my @durations = map ref($_) ? $_ : dur($_), @_[0,1];
+	my @durations = do {
+		local $SIG{__WARN__} = sub {};
+		map ref($_) ? $_ : dur($_), @_[0,1];
+	};
 	my $result    = join q[], map "DateTime::Duration"->compare(@durations, $_), MAGIC_DATES;
 	return MAGIC_TABLE->{$result} if exists MAGIC_TABLE->{$result};
 	return undef;
