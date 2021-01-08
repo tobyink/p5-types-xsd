@@ -187,16 +187,16 @@ sub dur_parse
 }
 
 facet qw( length minLength maxLength pattern enumeration whiteSpace ),
-declare Name, as Types::Standard::StrMatch[qr{^(?:$XML::RegExp::Name)$}sm];
+declare Name, as Types::Standard::StrMatch[qr{\A(?:$XML::RegExp::Name)\z}sm];
 
 facet qw( length minLength maxLength pattern enumeration whiteSpace ),
-declare NmToken, as Types::Standard::StrMatch[qr{^(?:$XML::RegExp::NmToken)$}sm];
+declare NmToken, as Types::Standard::StrMatch[qr{\A(?:$XML::RegExp::NmToken)\z}sm];
 
 facet qw( length minLength maxLength pattern enumeration whiteSpace ),
-declare NmTokens, as Types::Standard::StrMatch[qr{^(?:$XML::RegExp::NmToken)(?:\s+$XML::RegExp::NmToken)*$}sm];
+declare NmTokens, as Types::Standard::StrMatch[qr{\A(?:$XML::RegExp::NmToken)(?:\s+$XML::RegExp::NmToken)*\z}sm];
 
 facet qw( length minLength maxLength pattern enumeration whiteSpace ),
-declare NCName, as Types::Standard::StrMatch[qr{^(?:$XML::RegExp::NCName)$}sm];
+declare NCName, as Types::Standard::StrMatch[qr{\A(?:$XML::RegExp::NCName)\z}sm];
 
 facet qw( length minLength maxLength pattern enumeration whiteSpace ),
 declare Id, as NCName;
@@ -205,23 +205,25 @@ facet qw( length minLength maxLength pattern enumeration whiteSpace ),
 declare IdRef, as NCName;
 
 facet qw( length minLength maxLength pattern enumeration whiteSpace ),
-declare IdRefs, as Types::Standard::StrMatch[qr{^(?:$XML::RegExp::NCName)(?:\s+$XML::RegExp::NCName)*$}sm];
+declare IdRefs, as Types::Standard::StrMatch[qr{\A(?:$XML::RegExp::NCName)(?:\s+$XML::RegExp::NCName)*\z}sm];
 
 facet qw( length minLength maxLength pattern enumeration whiteSpace ),
 declare Entity, as NCName;
 
 facet qw( length minLength maxLength pattern enumeration whiteSpace ),
-declare Entities, as Types::Standard::StrMatch[qr{^(?:$XML::RegExp::NCName)(?:\s+$XML::RegExp::NCName)*$}sm];
+declare Entities, as Types::Standard::StrMatch[qr{\A(?:$XML::RegExp::NCName)(?:\s+$XML::RegExp::NCName)*\z}sm];
 
 facet qw( lengthQName minLengthQName maxLengthQName pattern enumeration whiteSpace ),
-declare QName, as Types::Standard::StrMatch[qr{^(?:$XML::RegExp::QName)$}sm];
+declare QName, as Types::Standard::StrMatch[qr{\A(?:$XML::RegExp::QName)\z}sm];
 
 facet qw( lengthQName minLengthQName maxLengthQName pattern enumeration whiteSpace ),
 declare Notation, as QName;
 
 facet qw( pattern whiteSpace enumeration maxInclusiveDuration maxExclusiveDuration minInclusiveDuration minExclusiveDuration ),
 declare Duration, as Types::Standard::StrMatch[
-	qr{^-?P
+	qr{\A
+		-?
+		P
 		(?:[0-9]+Y)?
 		(?:[0-9]+M)?
 		(?:[0-9]+D)?
@@ -230,17 +232,17 @@ declare Duration, as Types::Standard::StrMatch[
 			(?:[0-9]+M)?
 			(?:[0-9]+(?:\.[0-9]+)?S)?
 		)?
-	$}xism
+	\z}xism
 ];
 
 facet qw( pattern whiteSpace enumeration maxInclusiveDuration maxExclusiveDuration minInclusiveDuration minExclusiveDuration ),
-declare YearMonthDuration, as Duration->parameterize(pattern => qr{^[^DT]*$}i);
+declare YearMonthDuration, as Duration->parameterize(pattern => qr{\A[^DT]*\z}i);
 
 facet qw( pattern whiteSpace enumeration maxInclusiveDuration maxExclusiveDuration minInclusiveDuration minExclusiveDuration ),
-declare DayTimeDuration, as Duration->parameterize(pattern => qr{^[^YM]*[DT].*$}i);
+declare DayTimeDuration, as Duration->parameterize(pattern => qr{\A[^YM]*[DT].*\z}i);
 
 dt_maker(
-	DateTime => qr{^
+	DateTime => qr{\A
 		(-?[0-9]{4,})
 		-
 		([0-9]{2})
@@ -253,12 +255,12 @@ dt_maker(
 		:
 		([0-9]{2}(?:\.[0-9]+)?)
 		(Z | (?: [+-]\d{2}:?\d{2} ))?
-	$}xism,
+	\z}xism,
 	qw( year month day hour minute second time_zone ),
 );
 
 dt_maker(
-	DateTimeStamp => qr{^
+	DateTimeStamp => qr{\A
 		(-?[0-9]{4,})
 		-
 		([0-9]{2})
@@ -271,82 +273,82 @@ dt_maker(
 		:
 		([0-9]{2}(?:\.[0-9]+)?)
 		(Z | (?: [+-]\d{2}:?\d{2} ))
-	$}xism,
+	\z}xism,
 	qw( year month day hour minute second time_zone ),
 );
 
 dt_maker(
-	Time => qr{^
+	Time => qr{\A
 		([0-9]{2})
 		:
 		([0-9]{2})
 		:
 		([0-9]{2}(?:\.[0-9]+)?)
 		(Z | (?: [+-]\d{2}:?\d{2} ))?
-	$}xism,
+	\z}xism,
 	qw( hour minute second time_zone ),
 );
 
 dt_maker(
-	Date => qr{^
+	Date => qr{\A
 		(-?[0-9]{4,})
 		-
 		([0-9]{2})
 		-
 		([0-9]{2})
 		(Z | (?: [+-]\d{2}:?\d{2} ))?
-	$}xism,
+	\z}xism,
 	qw( year month day time_zone ),
 );
 
 dt_maker(
-	GYearMonth => qr{^
+	GYearMonth => qr{\A
 		(-?[0-9]{4,})
 		-
 		([0-9]{2})
 		(Z | (?: [+-]\d{2}:?\d{2} ))?
-	$}xism,
+	\z}xism,
 	qw( year month time_zone ),
 );
 
 dt_maker(
-	GYear => qr{^
+	GYear => qr{\A
 		(-?[0-9]{4,})
 		(Z | (?: [+-]\d{2}:?\d{2} ))?
-	$}xism,
+	\z}xism,
 	qw( year time_zone ),
 );
 
 dt_maker(
-	GMonthDay => qr{^
+	GMonthDay => qr{\A
 		-
 		-
 		([0-9]{2})
 		-
 		([0-9]{2})
 		(Z | (?: [+-]\d{2}:?\d{2} ))?
-	$}xism,
+	\z}xism,
 	qw( month day time_zone ),
 );
 
 dt_maker(
-	GDay => qr{^
+	GDay => qr{\A
 		-
 		-
 		-
 		([0-9]{2})
 		(Z | (?: [+-]\d{2}:?\d{2} ))?
-	$}xism,
+	\z}xism,
 	qw( day time_zone ),
 );
 
 dt_maker(
-	GMonth => qr{^
+	GMonth => qr{\A
 		-
 		-
 		([0-9]{2})
 		(Z | (?: [+-]\d{2}:?\d{2} ))?
-	$}xism,
+	\z}xism,
 	qw( month time_zone ),
 );
 
