@@ -95,3 +95,11 @@
 		];
 	].
 
+`Types-XSD 0.008 cpan:TOBYINK`
+	issued  2022-09-27;
+	changeset [
+		item [
+			a dcs:Update;
+			label "Work with newer facet mechanism in Types::XSD::Lite 0.007.";
+		];
+	].
